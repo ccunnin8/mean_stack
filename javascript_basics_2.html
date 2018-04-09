@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title>Javascript Basics II</title>
+  </head>
+  <body>
+    <script>
+      function magic_multipy(x,y){
+        if (x === 0 && y === 0){
+          return "All inputs 0"
+        }
+        else if (Array.isArray(x)) {
+          new_array = []
+          for (let i = 0; i < x.length; i++){
+             new_array.push(x[i] * y);
+          }
+          return new_array;
+        }
+        else if (typeof(x) === "string" || typeof(y) === "string" ){
+          return "Cannot multiply by string";
+        }
+        else {
+          return x * y;
+        }
+      }
+      console.log(magic_multipy(5,2))
+      console.log(magic_multipy(0,0))
+      console.log(magic_multipy([1, 2, 3], 2));
+      console.log(magic_multipy("seven",4));
+    </script>
+  </body>
+</html>
