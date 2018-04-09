@@ -1,0 +1,29 @@
+1:
+"world"
+
+2:
+"magnet"
+
+3:
+"super cool"
+
+4:
+"chicken"
+"half-chicken"
+
+5:
+"chicken"
+"fish"
+food is not defined
+
+6:
+"disco"
+"rock"
+"r&b"
+"disco"
+
+7:
+"san jose"
+"seattle"
+"burbank"
+"san jose"
