@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title>Game Of Thrones</title>
+    <style>
+      html, body {
+        height: 100%;
+        width: 100%;
+        margin: 0;
+        padding: 0;
+      }
+      .heads {
+        width: 100%;
+        height: 400px;
+        display: flex;
+        flex-direction: row;
+        align-items: space-between;
+        justify-content: center;
+      }
+      .head {
+        display: inline-block;
+        margin: 0 5px;
+      }
+      img {
+        height: 400px;
+        width: 400px;
+      }
+      .details {
+        width: 80%;
+        padding: 10px;
+        margin: 20px auto;
+        border: 1px solid black;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="heads">
+      <div class="head" id="stark">
+        <img src="https://i.pinimg.com/originals/4a/bc/38/4abc38758eba60d6712bd86dd1542697.png" alt="stark">
+      </div>
+      <div class="head" id="targaryen">
+        <img src="https://i.redd.it/nii5ko1oz6ry.png" alt="targaryen">
+      </div>
+      <div class="head" id="lannister">
+        <img src="https://imgix.ranker.com/user_node_img/50025/1000492327/original/joanna-lannister-tv-characters-photo-u1?w=650&q=50&fm=jpg&fit=crop&crop=faces"
+        alt="lannister">
+      </div>
+      <div class="head" id="baratheon">
+        <img src="http://awoiaf.westeros.org/images/thumb/2/2d/House_Baratheon.svg/250px-House_Baratheon.svg.png" alt="baratheon">
+      </div>
+    </div>
+    <div class="house_details">
+      <div class="details">
+        <h1>Name: <span id="name"></span></h1>
+        <h1>Words: </span id="words"></span></h1>
+        <h1>Titles: <span id="titles"></span></h1>
+      </div>
+    </div>
+    <script   src="https://code.jquery.com/jquery-3.3.1.min.js"   integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="   crossorigin="anonymous"></script>
+    <script>
+
+
+      $("#stark").click(function(){
+        getData("362");
+      });
+
+      $("#targaryen").click(function(){
+        getData("378");
+      });
+      $("#lannister").click(function(){
+        getData("230");
+      });
+      $("#baratheon").click(function(){
+        getData("15");
+      });
+      function getData(name){
+        var url = "https://anapioficeandfire.com/api/houses/";
+        $.get(url + name).done(function(data){
+          $("#name").html(data.name);
+          $("#words").html(data.words);
+          $("#titles").html(data.titles.join(", "));
+        });
+      }
+    </script>
+  </body>
+</html>
