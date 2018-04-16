@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Survey Form</title>
+    <script type ="text/javascript" src="/socket.io/socket.io.js"></script>
+  </head>
+  <body>
+    <h1>Survey Form</h1>
+    <form id="form" class="" action="/result" method="post">
+      <label for="name">Your Name: </label>
+      <input type="text" name="name" id="name" value=""><br>
+      <label for="location">Dojo Location: </label>
+      <select id="location" name="location">
+        <option value="Mountain View">Mountain View</option>
+        <option value="Seattle">Seattle</option>
+        <option value="Pheonix">Pheonix</option>
+        <option value="Washington, DC">Washington, DC</option>
+        <option value="Orlando">Orlando</option>
+      </select><br>
+      <label for="lang">Favorite Language: </label>
+      <select id="lang" class="" name="lang">
+        <option value="Javascript">Javascript</option>
+        <option value="Java">Java</option>
+        <option value="Python">Python</option>
+        <option value="Ruby">Ruby</option>
+        <option value="C">C/C++</option>
+      </select><br>
+      <label for="comment">Comment (optional)</label>
+      <textarea id="comment" name="comment" rows="8" cols="80"></textarea>
+      <input type="submit" name="submit" value="Submit">
+    </form>
+  <script>
+    var socket = io.connect();
+    var form = document.getElementById("form")
+    form.addEventListener("submit",function(e){
+      e.preventDefault();
+      socket.emit("posting_form",{
+        name: document.getElementById("name").value,
+        location: document.getElementById("location").value,
+        lang: document.getElementById("lang").value,
+        comment: document.getElementById("comment").value
+      });
+    });
+    socket.on("return_form",(data)=>{
+      var results = document.createElement("div");
+      var name = document.createElement("h1");
+      var location = document.createElement("h1");
+      var lang = document.createElement("h1");
+      var comment = document.createElement("h1")
+      var num = document.createElement("p")
+      comment.innerHTML = "Comment: " + data.comment;
+      location.innerHTML = "Location: " + data.location;
+      name.innerHTML = "Name: " + data.name;
+      lang.innerHTML = "Language: " + data.lang;
+      num.innerHTML = "Number: " + data.num;
+
+      results.appendChild(name);
+      results.appendChild(location);
+      results.appendChild(lang);
+      results.appendChild(num);
+        form.prepend(results);
+    });
+  </script>
+  </body>
+</html>
