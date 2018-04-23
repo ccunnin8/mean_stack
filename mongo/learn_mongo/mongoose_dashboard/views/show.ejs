@@ -8,6 +8,9 @@
     <h1>Name: <%= bear.name%></h1>
     <p>Email: <%= bear.email%></p>
     <p>Age: <%= bear.age %></p>
-    <a href="/">Back</a>
+    <a href="/bears/edit/<%= bear._id %>">Edit</a>  <a href="/">Back</a>
+    <form method="POST" action="/bears/destroy/<%= bear.id %>">
+      <input type="submit" value="Delete">
+    </form>
   </body>
 </html>

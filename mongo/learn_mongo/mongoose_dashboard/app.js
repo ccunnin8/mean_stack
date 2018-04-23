@@ -29,10 +29,8 @@ app.get("/bears/new",(req,res)=>{
 
 
 app.get("/bears/:id",(req,res)=>{
-  console.log("show_bear");
   Bear.findOne({_id: req.params.id },(err,bear)=>{
     if (!err && bear) {
-      console.log(bear);
       res.render("show", { bear });
     } else {
       res.redirect("/");
@@ -55,15 +53,35 @@ app.post("/bears",(req,res)=>{
 });
 
 app.get("/bears/edit/:id",(req,res)=>{
-  res.render("edit", { bear });
+  Bear.findOne({_id: req.params.id},(err,bear)=>{
+    res.render("edit", { bear });
+  });
 });
 
 app.post("/bears/:id",(req,res)=>{
-
+  Bear.update({_id: req.params.id}, {
+    $set:
+            { name: req.body.name,
+            email: req.body.email,
+             age: req.body.age },
+  },(err)=>{
+    if (err) {
+      console.log("Error");
+    } else {
+      res.redirect("/");
+    }
+  })
 });
 
-app.post("/bears/destroy:id",(req,res)=>{
-
+app.post("/bears/destroy/:id",(req,res)=>{
+  console.log("deleting bear",req.params.id);
+  Bear.deleteOne({_id: req.params.id},(err)=>{
+    if (err) {
+      console.log("ERROR");
+    } else {
+      res.redirect("/");
+    }
+  })
 });
 
 app.listen(port,()=>{
