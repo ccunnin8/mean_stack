@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title></title>
+  </head>
+  <body>
+    <h1>Bears</h1>
+    <% for(var i in bears) { %>
+      <h1>Name: <a href="bears/<%= bears[i]._id %>"><%= bears[i].name %></a></h1>
+      <p>Age: <%= bears[i].age %></p>
+      <p>email: <%= bears[i].email %></p>
+    <% } %>
+    <a href="/bears/new">Add a new bear</a>
+  </body>
+</html>
