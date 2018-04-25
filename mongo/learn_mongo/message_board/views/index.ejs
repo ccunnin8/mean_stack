@@ -2,7 +2,8 @@
 <html lang="en" dir="ltr">
   <head>
     <meta charset="utf-8">
-    <title></title>
+    <title>Message Board</title>
+    <link rel="stylesheet" href="/static/style.css"3>
   </head>
   <body>
     <h1>The Dojo Message Board</h1>
@@ -24,15 +25,17 @@
             <p><h2>Name: </h2><%= messages[i].name %></p>
             <p><h2>Message: </h2><%= messages[i].message %></p>
             <div class="comments">
-              <% for (var j in messages[i].comments) { %>
-                <p>Name: <%= messages[i].comments[j].name %></p>
-                <p>Comment: <%= messages[i].comments[j].comment %></p>
+              <% if(messages[i].comments.length > 0) { %>
+                <% for (var j = 0; j < messages[i].comments.length; j++) { %>
+                  <p>Name: <%= messages[i].comments[j].name %></p>
+                  <p>Comment: <%= messages[i].comments[j].message %></p>
+                <% } %>
               <% } %>
               <form class="" action="comment/<%= messages[i]._id %>" method="post">
                 <label for="name ">Name: </label>
                 <input type="text" name="name" value="">
                 <label for="message">Comment: </label>
-                <textarea name="message" rows="8" cols="80"></textarea>
+                <textarea name="message" rows="1" cols="80"></textarea>
                 <input type="submit" name="" value="Post Comment">
               </form>
             </div>

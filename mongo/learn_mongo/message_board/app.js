@@ -33,8 +33,22 @@ app.post("/new_message",(req,res)=>{
   })
 });
 
-app.post("/new_comment/:id",(req,res)=>{
-  res.redirect("/");
+app.post("/comment/:id",(req,res)=>{
+  Message.findOne({_id: req.params.id},(err,message)=>{
+    if (err) {
+      console.log("an error occured");
+      res.redirect("/");
+    } else {
+      message.comments.push({
+        name: req.body.name,
+        message: req.body.message
+      });
+      message.save((err)=>{
+        if (err) console.log(err);
+        res.redirect("/");
+      })
+    }
+  });
 });
 
 app.listen(PORT,() => console.log("listening on port ",PORT));
