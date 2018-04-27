@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title></title>
+  </head>
+  <body>
+    <% var messages = getMessages() %>
+    <% if (messages.error) { %>
+      <p><%= messages. error %>
+    <% } %>
+    <h1>Register</h1>
+    <% if (typeof(errors) !== 'undefined') {%>
+        <p><%= errors %></p>
+    <% } %>
+    <form class="" action="register" method="post">
+      <p>
+        <label for="first_name">First Name: </label>
+        <input type="text" name="first_name" value="">
+      </p>
+      <p>
+        <label for="last_name">Last Name: </label>
+        <input type="text" name="last_name" value="">
+      </p>
+      <p>
+        <label for="email">Email: </label>
+        <input type="email" name="email" value="">
+      </p>
+      <% if (messages.passwords) { %>
+        <p><%= messages.passwords %></p>
+      <% } %>
+      <p>
+        <label for="password">Password</label>
+        <input type="password" name="password" value="">
+      </p>
+      <p>
+        <label for="pass_conf">Confirm Password</label>
+        <input type="password" name="pass_conf" value="">
+      </p>
+      <p>
+        <label for="birthday">Date of Birth</label>
+        <input type="date" name="birthday" value="" placeholder="YYYY-MM-DD" required pattern="[0-9]{4}-[0-9]{2}-[0-9]{2}">
+      </p>
+      <input type="submit" name="" value="Submit">
+    </form>
+    <form class="" action="login" method="post">
+      <p>
+        <label for="email">Email: </label>
+        <input type="email" name="email" value="">
+      </p>
+      <p>
+        <label for="password">Password</label>
+        <input type="password" name="password" value="">
+      </p>
+      <p>
+        <input type="submit" name="" value="Login">
+      </p>
+    </form>
+  </body>
+</html>
