@@ -2,6 +2,7 @@ var express = require('express');
 var app = express();
 var bodyParser = require('body-parser')
 var { User } = require('./models.js');
+const ejsLint = require('ejs-lint');
 
 app.use(bodyParser.urlencoded({extended: true }));
 
@@ -11,15 +12,20 @@ app.set("views",path.join(__dirname,"./views"));
 
 app.set("view engine","ejs");
 
+
+
 app.get("/",(req,res)=>{
-  User.find({},(err,data)=>{
-    if (err) {
-      console.log("ERROR");
-      res.render("index");
-    } else {
-      res.render("index", { users: data });
-    }
-  });
+  try {
+      User.find({},(err,data)=>{
+      if (err) {
+        res.render("index", { errors: err });
+      } else {
+        res.render("index", { users: data, errors: err });
+      }
+    });
+  } catch(error){
+    console.log("an error happened!");
+  }
 });
 
 app.post("/users",(req,res)=>{
@@ -40,3 +46,5 @@ app.post("/users",(req,res)=>{
 app.listen(8000,()=>{
   console.log("listening on 8000");
 });
+
+User.remove({})

@@ -5,6 +5,11 @@
     <title>Make a User</title>
   </head>
   <body>
+    <% if(typeof(errors) != undefined ){ %>
+      <% for (var x in errors ) { %>
+      <h3><%= errors[x].messages %></h3>
+      <% } %>
+    <% } %>
     <% for(var i = 0; i < users.length; i++) { %>
       <p><%= `${users[i].name} is ${users[i].age} years old` %></p>
     <% } %>

@@ -1,0 +1,1721 @@
+> db.createCollection("students")
+{ "ok" : 1 }
+> students.insert({
+... name: "Corey",
+... home_state: "New Hampshire",
+... lucky_number: 14,
+... birthday: { month: 03, day: 14, year: 1988 }})
+2018-04-19T18:14:01.199-0400 E QUERY    [thread1] ReferenceError: students is not defined :
+@(shell):1:1
+> db.students.insert({
+... name: "Corey",
+... home_state: "New Hampshire",
+... lucky_number: 14,
+... birthday: {
+... month: 3,
+... day: 14,
+... year: 1988 }})
+WriteResult({ "nInserted" : 1 })
+> db.students.insert({
+... name: "Joe",
+... home_state: "Massachusetts",
+... lucky_number: 15,
+... birthdate: {
+... month: 3,
+... day: 15,
+... year: 1977 }})
+WriteResult({ "nInserted" : 1 })
+> db.students.insert({
+... name: "José",
+... home_state: "Vermont",
+... lucky_number: 16,
+... birthdate: {
+... day: 5,
+... month: 12,
+... year: 1924 }})
+WriteResult({ "nInserted" : 1 })
+> db.students.insert({
+... name: "Jasper",
+... home_state: "Connecticut",
+... lucky_number: 61,
+... birthdate: {
+... month: 1,
+... day: 1,
+... year: 1111 }})
+WriteResult({ "nInserted" : 1 })
+> db.students.insert({ name: "Cindi", home_state: "Massachusetts", lucky_number: 051, birthdate: { month: 3, day: 15, year: 1957 }})
+WriteResult({ "nInserted" : 1 })
+> db.students.insert({ name: "Maine", home_state: "Rhode Island", lucky_number: 10101, birthdate: { month: 12, day: 15, year: 1999 }})
+WriteResult({ "nInserted" : 1 })
+> db.students.find().pretty()
+{
+	"_id" : ObjectId("5ad914dbdc9689471d3112f7"),
+	"name" : "Corey",
+	"home_state" : "New Hampshire",
+	"lucky_number" : 14,
+	"birthday" : {
+		"month" : 3,
+		"day" : 14,
+		"year" : 1988
+	}
+}
+{
+	"_id" : ObjectId("5ad914ffdc9689471d3112f8"),
+	"name" : "Joe",
+	"home_state" : "Massachusetts",
+	"lucky_number" : 15,
+	"birthdate" : {
+		"month" : 3,
+		"day" : 15,
+		"year" : 1977
+	}
+}
+{
+	"_id" : ObjectId("5ad91528dc9689471d3112f9"),
+	"name" : "José",
+	"home_state" : "Vermont",
+	"lucky_number" : 16,
+	"birthdate" : {
+		"day" : 5,
+		"month" : 12,
+		"year" : 1924
+	}
+}
+{
+	"_id" : ObjectId("5ad91555dc9689471d3112fa"),
+	"name" : "Jasper",
+	"home_state" : "Connecticut",
+	"lucky_number" : 61,
+	"birthdate" : {
+		"month" : 1,
+		"day" : 1,
+		"year" : 1111
+	}
+}
+{
+	"_id" : ObjectId("5ad9156bdc9689471d3112fb"),
+	"name" : "Cindi",
+	"home_state" : "Massachusetts",
+	"lucky_number" : 41,
+	"birthdate" : {
+		"month" : 3,
+		"day" : 15,
+		"year" : 1957
+	}
+}
+{
+	"_id" : ObjectId("5ad91583dc9689471d3112fc"),
+	"name" : "Maine",
+	"home_state" : "Rhode Island",
+	"lucky_number" : 10101,
+	"birthdate" : {
+		"month" : 12,
+		"day" : 15,
+		"year" : 1999
+	}
+}
+> db.students.find({home_state: "California"})
+> db.students.find({home_state: "Washington"})
+> db.students.find({ $or: [ {home_state: "Californoia"}, {home_state: "Washington
+2018-04-19T18:22:57.299-0400 E QUERY    [thread1] SyntaxError: unterminated string literal @(shell):1:68
+> db.students.find({ $or: [ {home_state: "Californoia"}, {home_state: "Washington"}]})
+> db.students.find({ $or: [ {home_state: "Californoia"}, {home_state: "Washington", home_state: "Massachusetts" }]})
+{ "_id" : ObjectId("5ad914ffdc9689471d3112f8"), "name" : "Joe", "home_state" : "Massachusetts", "lucky_number" : 15, "birthdate" : { "month" : 3, "day" : 15, "year" : 1977 } }
+{ "_id" : ObjectId("5ad9156bdc9689471d3112fb"), "name" : "Cindi", "home_state" : "Massachusetts", "lucky_number" : 41, "birthdate" : { "month" : 3, "day" : 15, "year" : 1957 } }
+> db.students.find({ $or: [ {home_state: "Californoia"}, {home_state: "Washington", home_state: "Massachusetts" }]}).pretty()
+{
+	"_id" : ObjectId("5ad914ffdc9689471d3112f8"),
+	"name" : "Joe",
+	"home_state" : "Massachusetts",
+	"lucky_number" : 15,
+	"birthdate" : {
+		"month" : 3,
+		"day" : 15,
+		"year" : 1977
+	}
+}
+{
+	"_id" : ObjectId("5ad9156bdc9689471d3112fb"),
+	"name" : "Cindi",
+	"home_state" : "Massachusetts",
+	"lucky_number" : 41,
+	"birthdate" : {
+		"month" : 3,
+		"day" : 15,
+		"year" : 1957
+	}
+}
+> db.students.find( { luckey_number: { $gte: 3 } })
+> db.students.find( { lucky_number: { $gte: 3 } })
+{ "_id" : ObjectId("5ad914dbdc9689471d3112f7"), "name" : "Corey", "home_state" : "New Hampshire", "lucky_number" : 14, "birthday" : { "month" : 3, "day" : 14, "year" : 1988 } }
+{ "_id" : ObjectId("5ad914ffdc9689471d3112f8"), "name" : "Joe", "home_state" : "Massachusetts", "lucky_number" : 15, "birthdate" : { "month" : 3, "day" : 15, "year" : 1977 } }
+{ "_id" : ObjectId("5ad91528dc9689471d3112f9"), "name" : "José", "home_state" : "Vermont", "lucky_number" : 16, "birthdate" : { "day" : 5, "month" : 12, "year" : 1924 } }
+{ "_id" : ObjectId("5ad91555dc9689471d3112fa"), "name" : "Jasper", "home_state" : "Connecticut", "lucky_number" : 61, "birthdate" : { "month" : 1, "day" : 1, "year" : 1111 } }
+{ "_id" : ObjectId("5ad9156bdc9689471d3112fb"), "name" : "Cindi", "home_state" : "Massachusetts", "lucky_number" : 41, "birthdate" : { "month" : 3, "day" : 15, "year" : 1957 } }
+{ "_id" : ObjectId("5ad91583dc9689471d3112fc"), "name" : "Maine", "home_state" : "Rhode Island", "lucky_number" : 10101, "birthdate" : { "month" : 12, "day" : 15, "year" : 1999 } }
+> db.students.find( { lucky_number: { $gte: 3 } }).pretty()
+{
+	"_id" : ObjectId("5ad914dbdc9689471d3112f7"),
+	"name" : "Corey",
+	"home_state" : "New Hampshire",
+	"lucky_number" : 14,
+	"birthday" : {
+		"month" : 3,
+		"day" : 14,
+		"year" : 1988
+	}
+}
+{
+	"_id" : ObjectId("5ad914ffdc9689471d3112f8"),
+	"name" : "Joe",
+	"home_state" : "Massachusetts",
+	"lucky_number" : 15,
+	"birthdate" : {
+		"month" : 3,
+		"day" : 15,
+		"year" : 1977
+	}
+}
+{
+	"_id" : ObjectId("5ad91528dc9689471d3112f9"),
+	"name" : "José",
+	"home_state" : "Vermont",
+	"lucky_number" : 16,
+	"birthdate" : {
+		"day" : 5,
+		"month" : 12,
+		"year" : 1924
+	}
+}
+{
+	"_id" : ObjectId("5ad91555dc9689471d3112fa"),
+	"name" : "Jasper",
+	"home_state" : "Connecticut",
+	"lucky_number" : 61,
+	"birthdate" : {
+		"month" : 1,
+		"day" : 1,
+		"year" : 1111
+	}
+}
+{
+	"_id" : ObjectId("5ad9156bdc9689471d3112fb"),
+	"name" : "Cindi",
+	"home_state" : "Massachusetts",
+	"lucky_number" : 41,
+	"birthdate" : {
+		"month" : 3,
+		"day" : 15,
+		"year" : 1957
+	}
+}
+{
+	"_id" : ObjectId("5ad91583dc9689471d3112fc"),
+	"name" : "Maine",
+	"home_state" : "Rhode Island",
+	"lucky_number" : 10101,
+	"birthdate" : {
+		"month" : 12,
+		"day" : 15,
+		"year" : 1999
+	}
+}
+> db.students.find( { lucky_number: { $lte: 10 } }).pretty()
+> db.students.find( { lucky_number: {$and [{ $gte: 1 }, { $lte: 10 }]}).pretty()
+...
+... ^C
+
+> db.students.find( { lucky_number: {$and [{ $gte: 1 }, { $lte: 10 }]}).pretty()
+... )
+2018-04-19T18:25:13.233-0400 E QUERY    [thread1] SyntaxError: missing : after property id @(shell):1:40
+> db.students.find( { lucky_number: {$and: [{ $gte: 1 }, { $lte: 10 }]}).pretty() )
+2018-04-19T18:25:20.804-0400 E QUERY    [thread1] SyntaxError: missing } after property list @(shell):1:69
+> db.students.find( { lucky_number: {$and: [{ $gte: 1 }, { $lte: 10 }]}}).pretty()
+Error: error: {
+	"ok" : 0,
+	"errmsg" : "unknown operator: $and",
+	"code" : 2,
+	"codeName" : "BadValue"
+}
+> db.students.find({$and: [{ lucky_number: {$gte: 1 }}, {lucky_number: { $lte: 10 }}]}).pretty()
+> db.students.find({$and: [{ lucky_number: {$gte: 1 }}, {lucky_number: { $lte: 20 }}]}).pretty()
+{
+	"_id" : ObjectId("5ad914dbdc9689471d3112f7"),
+	"name" : "Corey",
+	"home_state" : "New Hampshire",
+	"lucky_number" : 14,
+	"birthday" : {
+		"month" : 3,
+		"day" : 14,
+		"year" : 1988
+	}
+}
+{
+	"_id" : ObjectId("5ad914ffdc9689471d3112f8"),
+	"name" : "Joe",
+	"home_state" : "Massachusetts",
+	"lucky_number" : 15,
+	"birthdate" : {
+		"month" : 3,
+		"day" : 15,
+		"year" : 1977
+	}
+}
+{
+	"_id" : ObjectId("5ad91528dc9689471d3112f9"),
+	"name" : "José",
+	"home_state" : "Vermont",
+	"lucky_number" : 16,
+	"birthdate" : {
+		"day" : 5,
+		"month" : 12,
+		"year" : 1924
+	}
+}
+> db.students.find().update( $set: { interests: ["coding","brunch","MongoDB"]}})
+2018-04-19T18:28:15.034-0400 E QUERY    [thread1] SyntaxError: missing ) after argument list @(shell):1:31
+> db.students.find().update({ $set: { interests: ["coding","brunch","MongoDB"]}})
+2018-04-19T18:28:47.074-0400 E QUERY    [thread1] TypeError: db.students.find(...).update is not a function :
+@(shell):1:1
+> db.students.update({},{ $set: { interests: ["coding","brunch","MongoDB"]}})
+WriteResult({ "nMatched" : 1, "nUpserted" : 0, "nModified" : 1 })
+> db.students.find().pretty()
+{
+	"_id" : ObjectId("5ad914dbdc9689471d3112f7"),
+	"name" : "Corey",
+	"home_state" : "New Hampshire",
+	"lucky_number" : 14,
+	"birthday" : {
+		"month" : 3,
+		"day" : 14,
+		"year" : 1988
+	},
+	"interests" : [
+		"coding",
+		"brunch",
+		"MongoDB"
+	]
+}
+{
+	"_id" : ObjectId("5ad914ffdc9689471d3112f8"),
+	"name" : "Joe",
+	"home_state" : "Massachusetts",
+	"lucky_number" : 15,
+	"birthdate" : {
+		"month" : 3,
+		"day" : 15,
+		"year" : 1977
+	}
+}
+{
+	"_id" : ObjectId("5ad91528dc9689471d3112f9"),
+	"name" : "José",
+	"home_state" : "Vermont",
+	"lucky_number" : 16,
+	"birthdate" : {
+		"day" : 5,
+		"month" : 12,
+		"year" : 1924
+	}
+}
+{
+	"_id" : ObjectId("5ad91555dc9689471d3112fa"),
+	"name" : "Jasper",
+	"home_state" : "Connecticut",
+	"lucky_number" : 61,
+	"birthdate" : {
+		"month" : 1,
+		"day" : 1,
+		"year" : 1111
+	}
+}
+{
+	"_id" : ObjectId("5ad9156bdc9689471d3112fb"),
+	"name" : "Cindi",
+	"home_state" : "Massachusetts",
+	"lucky_number" : 41,
+	"birthdate" : {
+		"month" : 3,
+		"day" : 15,
+		"year" : 1957
+	}
+}
+{
+	"_id" : ObjectId("5ad91583dc9689471d3112fc"),
+	"name" : "Maine",
+	"home_state" : "Rhode Island",
+	"lucky_number" : 10101,
+	"birthdate" : {
+		"month" : 12,
+		"day" : 15,
+		"year" : 1999
+	}
+}
+> db.students.update({},{ $set: { interests: ["coding","brunch","MongoDB"]}},{multi: true})
+WriteResult({ "nMatched" : 6, "nUpserted" : 0, "nModified" : 5 })
+> db.students.find().pretty()
+{
+	"_id" : ObjectId("5ad914dbdc9689471d3112f7"),
+	"name" : "Corey",
+	"home_state" : "New Hampshire",
+	"lucky_number" : 14,
+	"birthday" : {
+		"month" : 3,
+		"day" : 14,
+		"year" : 1988
+	},
+	"interests" : [
+		"coding",
+		"brunch",
+		"MongoDB"
+	]
+}
+{
+	"_id" : ObjectId("5ad914ffdc9689471d3112f8"),
+	"name" : "Joe",
+	"home_state" : "Massachusetts",
+	"lucky_number" : 15,
+	"birthdate" : {
+		"month" : 3,
+		"day" : 15,
+		"year" : 1977
+	},
+	"interests" : [
+		"coding",
+		"brunch",
+		"MongoDB"
+	]
+}
+{
+	"_id" : ObjectId("5ad91528dc9689471d3112f9"),
+	"name" : "José",
+	"home_state" : "Vermont",
+	"lucky_number" : 16,
+	"birthdate" : {
+		"day" : 5,
+		"month" : 12,
+		"year" : 1924
+	},
+	"interests" : [
+		"coding",
+		"brunch",
+		"MongoDB"
+	]
+}
+{
+	"_id" : ObjectId("5ad91555dc9689471d3112fa"),
+	"name" : "Jasper",
+	"home_state" : "Connecticut",
+	"lucky_number" : 61,
+	"birthdate" : {
+		"month" : 1,
+		"day" : 1,
+		"year" : 1111
+	},
+	"interests" : [
+		"coding",
+		"brunch",
+		"MongoDB"
+	]
+}
+{
+	"_id" : ObjectId("5ad9156bdc9689471d3112fb"),
+	"name" : "Cindi",
+	"home_state" : "Massachusetts",
+	"lucky_number" : 41,
+	"birthdate" : {
+		"month" : 3,
+		"day" : 15,
+		"year" : 1957
+	},
+	"interests" : [
+		"coding",
+		"brunch",
+		"MongoDB"
+	]
+}
+{
+	"_id" : ObjectId("5ad91583dc9689471d3112fc"),
+	"name" : "Maine",
+	"home_state" : "Rhode Island",
+	"lucky_number" : 10101,
+	"birthdate" : {
+		"month" : 12,
+		"day" : 15,
+		"year" : 1999
+	},
+	"interests" : [
+		"coding",
+		"brunch",
+		"MongoDB"
+	]
+}
+> db.students.update({ name: "Cindi"}, { $push: { "interests" : "knittin" }})
+WriteResult({ "nMatched" : 1, "nUpserted" : 0, "nModified" : 1 })
+> db.students.update({ name: "Corey"}, { $push: { "interests" : "cats" }})
+WriteResult({ "nMatched" : 1, "nUpserted" : 0, "nModified" : 1 })
+> db.students.update({ name: "Jasper"}, { $push: { "interests" : "taxes" }})
+WriteResult({ "nMatched" : 1, "nUpserted" : 0, "nModified" : 1 })
+> db.students.update({ name: "Jasper"}, { $pop: { "interests" : "taxes" }})
+WriteResult({
+	"nMatched" : 0,
+	"nUpserted" : 0,
+	"nModified" : 0,
+	"writeError" : {
+		"code" : 9,
+		"errmsg" : "Expected a number in: interests: \"taxes\""
+	}
+})
+> db.students.update({ name: "Jasper"}, { $pull: { array_key: "taxes" }})
+WriteResult({ "nMatched" : 1, "nUpserted" : 0, "nModified" : 0 })
+> db.students.find({name:"Jasper"}).pretty()
+{
+	"_id" : ObjectId("5ad91555dc9689471d3112fa"),
+	"name" : "Jasper",
+	"home_state" : "Connecticut",
+	"lucky_number" : 61,
+	"birthdate" : {
+		"month" : 1,
+		"day" : 1,
+		"year" : 1111
+	},
+	"interests" : [
+		"coding",
+		"brunch",
+		"MongoDB",
+		"taxes"
+	]
+}
+> db.students.update({ name: "Jasper"}, { $pull: { interests: "taxes" }})
+WriteResult({ "nMatched" : 1, "nUpserted" : 0, "nModified" : 1 })
+> db.students.find({name:"Jasper"}).pretty()
+{
+	"_id" : ObjectId("5ad91555dc9689471d3112fa"),
+	"name" : "Jasper",
+	"home_state" : "Connecticut",
+	"lucky_number" : 61,
+	"birthdate" : {
+		"month" : 1,
+		"day" : 1,
+		"year" : 1111
+	},
+	"interests" : [
+		"coding",
+		"brunch",
+		"MongoDB"
+	]
+}
+> db.students.removeMany( { $or: [ {home_state: "California" }, {home_state: "Washington"}]})
+2018-04-19T18:37:56.696-0400 E QUERY    [thread1] TypeError: db.students.removeMany is not a function :
+@(shell):1:1
+> db.students.deleteMany( { $or: [ {home_state: "California" }, {home_state: "Washington"}]})
+{ "acknowledged" : true, "deletedCount" : 0 }
+> db.students.remove({name: "Jasper"})
+WriteResult({ "nRemoved" : 1 })
+> db.students.deleteOne({ lucky_number: { $gt: 5}})
+{ "acknowledged" : true, "deletedCount" : 1 }
+> db.students.updateMany({},{ $set: { number_of_belts: 0 }})
+{ "acknowledged" : true, "matchedCount" : 4, "modifiedCount" : 4 }
+> db.students.find().pretty()
+{
+	"_id" : ObjectId("5ad914ffdc9689471d3112f8"),
+	"name" : "Joe",
+	"home_state" : "Massachusetts",
+	"lucky_number" : 15,
+	"birthdate" : {
+		"month" : 3,
+		"day" : 15,
+		"year" : 1977
+	},
+	"interests" : [
+		"coding",
+		"brunch",
+		"MongoDB"
+	],
+	"number_of_belts" : 0
+}
+{
+	"_id" : ObjectId("5ad91528dc9689471d3112f9"),
+	"name" : "José",
+	"home_state" : "Vermont",
+	"lucky_number" : 16,
+	"birthdate" : {
+		"day" : 5,
+		"month" : 12,
+		"year" : 1924
+	},
+	"interests" : [
+		"coding",
+		"brunch",
+		"MongoDB"
+	],
+	"number_of_belts" : 0
+}
+{
+	"_id" : ObjectId("5ad9156bdc9689471d3112fb"),
+	"name" : "Cindi",
+	"home_state" : "Massachusetts",
+	"lucky_number" : 41,
+	"birthdate" : {
+		"month" : 3,
+		"day" : 15,
+		"year" : 1957
+	},
+	"interests" : [
+		"coding",
+		"brunch",
+		"MongoDB",
+		"knittin"
+	],
+	"number_of_belts" : 0
+}
+{
+	"_id" : ObjectId("5ad91583dc9689471d3112fc"),
+	"name" : "Maine",
+	"home_state" : "Rhode Island",
+	"lucky_number" : 10101,
+	"birthdate" : {
+		"month" : 12,
+		"day" : 15,
+		"year" : 1999
+	},
+	"interests" : [
+		"coding",
+		"brunch",
+		"MongoDB"
+	],
+	"number_of_belts" : 0
+}
+> db.students.updateMany({},{ $unset: { lucky_number: "" }})
+{ "acknowledged" : true, "matchedCount" : 4, "modifiedCount" : 4 }
+> db.students.find().pretty()
+{
+	"_id" : ObjectId("5ad914ffdc9689471d3112f8"),
+	"name" : "Joe",
+	"home_state" : "Massachusetts",
+	"birthdate" : {
+		"month" : 3,
+		"day" : 15,
+		"year" : 1977
+	},
+	"interests" : [
+		"coding",
+		"brunch",
+		"MongoDB"
+	],
+	"number_of_belts" : 0
+}
+{
+	"_id" : ObjectId("5ad91528dc9689471d3112f9"),
+	"name" : "José",
+	"home_state" : "Vermont",
+	"birthdate" : {
+		"day" : 5,
+		"month" : 12,
+		"year" : 1924
+	},
+	"interests" : [
+		"coding",
+		"brunch",
+		"MongoDB"
+	],
+	"number_of_belts" : 0
+}
+{
+	"_id" : ObjectId("5ad9156bdc9689471d3112fb"),
+	"name" : "Cindi",
+	"home_state" : "Massachusetts",
+	"birthdate" : {
+		"month" : 3,
+		"day" : 15,
+		"year" : 1957
+	},
+	"interests" : [
+		"coding",
+		"brunch",
+		"MongoDB",
+		"knittin"
+	],
+	"number_of_belts" : 0
+}
+{
+	"_id" : ObjectId("5ad91583dc9689471d3112fc"),
+	"name" : "Maine",
+	"home_state" : "Rhode Island",
+	"birthdate" : {
+		"month" : 12,
+		"day" : 15,
+		"year" : 1999
+	},
+	"interests" : [
+		"coding",
+		"brunch",
+		"MongoDB"
+	],
+	"number_of_belts" : 0
+}
+> db.students.updateMany({},{ $set: {updated_on: $currentDate }})
+2018-04-19T18:43:28.048-0400 E QUERY    [thread1] ReferenceError: $currentDate is not defined :
+@(shell):1:36
+> db.students.updateMany({},{ $set: { $currentDate: { updated_on: {$type: "timestamp }}}})
+2018-04-19T18:44:48.419-0400 E QUERY    [thread1] SyntaxError: unterminated string literal @(shell):1:72
+> db.students.updateMany({},{ $set: { $currentDate: { updated_on: {$type: "timestamp" }}}})
+2018-04-19T18:44:52.705-0400 E QUERY    [thread1] WriteError: The dollar ($) prefixed field '$currentDate' in '$currentDate' is not valid for storage. :
+WriteError({
+	"index" : 0,
+	"code" : 52,
+	"errmsg" : "The dollar ($) prefixed field '$currentDate' in '$currentDate' is not valid for storage.",
+	"op" : {
+		"q" : {
+
+		},
+		"u" : {
+			"$set" : {
+				"$currentDate" : {
+					"updated_on" : {
+						"$type" : "timestamp"
+					}
+				}
+			}
+		},
+		"multi" : true,
+		"upsert" : false
+	}
+})
+WriteError@src/mongo/shell/bulk_api.js:466:48
+Bulk/mergeBatchResults@src/mongo/shell/bulk_api.js:846:49
+Bulk/executeBatch@src/mongo/shell/bulk_api.js:910:13
+Bulk/this.execute@src/mongo/shell/bulk_api.js:1154:21
+DBCollection.prototype.updateMany@src/mongo/shell/crud_api.js:655:17
+@(shell):1:1
+> db.students.updateMany({},{ $currentDate: { updated_on: {$type: "timestamp" }}})
+{ "acknowledged" : true, "matchedCount" : 4, "modifiedCount" : 4 }
+> db.students.find().pretty()
+{
+	"_id" : ObjectId("5ad914ffdc9689471d3112f8"),
+	"name" : "Joe",
+	"home_state" : "Massachusetts",
+	"birthdate" : {
+		"month" : 3,
+		"day" : 15,
+		"year" : 1977
+	},
+	"interests" : [
+		"coding",
+		"brunch",
+		"MongoDB"
+	],
+	"number_of_belts" : 0,
+	"updated_on" : Timestamp(1524177954, 1)
+}
+{
+	"_id" : ObjectId("5ad91528dc9689471d3112f9"),
+	"name" : "José",
+	"home_state" : "Vermont",
+	"birthdate" : {
+		"day" : 5,
+		"month" : 12,
+		"year" : 1924
+	},
+	"interests" : [
+		"coding",
+		"brunch",
+		"MongoDB"
+	],
+	"number_of_belts" : 0,
+	"updated_on" : Timestamp(1524177954, 2)
+}
+{
+	"_id" : ObjectId("5ad9156bdc9689471d3112fb"),
+	"name" : "Cindi",
+	"home_state" : "Massachusetts",
+	"birthdate" : {
+		"month" : 3,
+		"day" : 15,
+		"year" : 1957
+	},
+	"interests" : [
+		"coding",
+		"brunch",
+		"MongoDB",
+		"knittin"
+	],
+	"number_of_belts" : 0,
+	"updated_on" : Timestamp(1524177954, 3)
+}
+{
+	"_id" : ObjectId("5ad91583dc9689471d3112fc"),
+	"name" : "Maine",
+	"home_state" : "Rhode Island",
+	"birthdate" : {
+		"month" : 12,
+		"day" : 15,
+		"year" : 1999
+	},
+	"interests" : [
+		"coding",
+		"brunch",
+		"MongoDB"
+	],
+	"number_of_belts" : 0,
+	"updated_on" : Timestamp(1524177954, 4)
+}
+> tate: "Massachusetts",
+... ... lucky_number: 15,
+... ... birthdate: {
+... ... month: 3,
+... ... day: 15,
+... ... year: 1977 }})
+2018-04-19T18:47:23.032-0400 E QUERY    [thread1] SyntaxError: missing ; before statement @(shell):2:12
+> WriteResult({ "nInserted" : 1 })
+2018-04-19T18:47:23.033-0400 E QUERY    [thread1] TypeError: bulkResult.writeErrors is undefined :
+WriteResult/this.getWriteError@src/mongo/shell/bulk_api.js:137:1
+WriteResult/this.tojson@src/mongo/shell/bulk_api.js:186:17
+WriteResult/this.toString@src/mongo/shell/bulk_api.js:204:37
+WriteResult/this.shellPrint@src/mongo/shell/bulk_api.js:208:20
+shellPrintHelper@src/mongo/shell/utils.js:549:1
+@(shell2):1:1
+> > db.students.insert({
+... ... name: "José",
+... ... home_state: "Vermont",
+... ... lucky_number: 16,
+... ... birthdate: {
+... ... day: 5,
+... ... month: 12,
+... ... year: 1924 }})
+2018-04-19T18:47:23.035-0400 E QUERY    [thread1] SyntaxError: expected expression, got '>' @(shell):1:0
+> WriteResult({ "nInserted" : 1 })
+2018-04-19T18:47:23.036-0400 E QUERY    [thread1] TypeError: bulkResult.writeErrors is undefined :
+WriteResult/this.getWriteError@src/mongo/shell/bulk_api.js:137:1
+WriteResult/this.tojson@src/mongo/shell/bulk_api.js:186:17
+WriteResult/this.toString@src/mongo/shell/bulk_api.js:204:37
+WriteResult/this.shellPrint@src/mongo/shell/bulk_api.js:208:20
+shellPrintHelper@src/mongo/shell/utils.js:549:1
+@(shell2):1:1
+> > db.students.insert({
+... ... name: "Jasper",
+... ... home_state: "Connecticut",
+... ... lucky_number: 61,
+... ... birthdate: {
+... ... month: 1,
+... ... day: 1,
+... ... year: 1111 }})
+2018-04-19T18:47:23.038-0400 E QUERY    [thread1] SyntaxError: expected expression, got '>' @(shell):1:0
+> WriteResult({ "nInserted" : 1 })
+2018-04-19T18:47:23.038-0400 E QUERY    [thread1] TypeError: bulkResult.writeErrors is undefined :
+WriteResult/this.getWriteError@src/mongo/shell/bulk_api.js:137:1
+WriteResult/this.tojson@src/mongo/shell/bulk_api.js:186:17
+WriteResult/this.toString@src/mongo/shell/bulk_api.js:204:37
+WriteResult/this.shellPrint@src/mongo/shell/bulk_api.js:208:20
+shellPrintHelper@src/mongo/shell/utils.js:549:1
+@(shell2):1:1
+> > db.students.insert({ name: "Cindi", home_state: "Massachusetts", lucky_number: 051, birthdate: { month: 3, day: 15, year: 1957 }})
+2018-04-19T18:47:23.039-0400 E QUERY    [thread1] SyntaxError: expected expression, got '>' @(shell):1:0
+> WriteResult({ "nInserted" : 1 })
+2018-04-19T18:47:23.040-0400 E QUERY    [thread1] TypeError: bulkResult.writeErrors is undefined :
+WriteResult/this.getWriteError@src/mongo/shell/bulk_api.js:137:1
+WriteResult/this.tojson@src/mongo/shell/bulk_api.js:186:17
+WriteResult/this.toString@src/mongo/shell/bulk_api.js:204:37
+WriteResult/this.shellPrint@src/mongo/shell/bulk_api.js:208:20
+shellPrintHelper@src/mongo/shell/utils.js:549:1
+@(shell2):1:1
+> > db.students.insert({ name: "Maine", home_state: "Rhode Island", lucky_number: 10101, birthdate: { month: 12, day: 15, year: 1999 }})
+
+2018-04-19T18:47:23.041-0400 E QUERY    [thread1] SyntaxError: expected expression, got '>' @(shell):1:0
+> WriteResult({ "nInserted" : 1 })
+2018-04-19T18:47:23.041-0400 E QUERY    [thread1] TypeError: bulkResult.writeErrors is undefined :
+WriteResult/this.getWriteError@src/mongo/shell/bulk_api.js:137:1
+WriteResult/this.tojson@src/mongo/shell/bulk_api.js:186:17
+WriteResult/this.toString@src/mongo/shell/bulk_api.js:204:37
+WriteResult/this.shellPrint@src/mongo/shell/bulk_api.js:208:20
+shellPrintHelper@src/mongo/shell/utils.js:549:1
+@(shell2):1:1
+> > db.students.find().pretty()
+2018-04-19T18:47:23.042-0400 E QUERY    [thread1] SyntaxError: expected expression, got '>' @(shell):1:0
+> {
+... "_id" : ObjectId("5ad914dbdc9689471d3112f7"),
+... "name" : "Corey",
+... "home_state" : "New Hampshire",
+... "lucky_number" : 14,
+... "birthday" : {
+... "month" : 3,
+... "day" : 14,
+... "year" : 1988
+... }
+... }
+2018-04-19T18:47:23.121-0400 E QUERY    [thread1] SyntaxError: missing ; before statement @(shell):2:6
+> {
+... "_id" : ObjectId("5ad914ffdc9689471d3112f8"),
+... "name" : "Joe",
+... "home_state" : "Massachusetts",
+... "lucky_number" : 15,
+... "birthdate" : {
+... "month" : 3,
+... "day" : 15,
+... "year" : 1977
+... }
+... }
+2018-04-19T18:47:23.125-0400 E QUERY    [thread1] SyntaxError: missing ; before statement @(shell):2:6
+> {
+... "_id" : ObjectId("5ad91528dc9689471d3112f9"),
+... "name" : "José",
+... "home_state" : "Vermont",
+... "lucky_number" : 16,
+... "birthdate" : {
+... "day" : 5,
+... "month" : 12,
+... "year" : 1924
+... }
+... }
+2018-04-19T18:47:23.128-0400 E QUERY    [thread1] SyntaxError: missing ; before statement @(shell):2:6
+> {
+... "_id" : ObjectId("5ad91555dc9689471d3112fa"),
+... "name" : "Jasper",
+... "home_state" : "Connecticut",
+... "lucky_number" : 61,
+... "birthdate" : {
+... "month" : 1,
+... "day" : 1,
+... "year" : 1111
+... }
+... }
+2018-04-19T18:47:23.131-0400 E QUERY    [thread1] SyntaxError: missing ; before statement @(shell):2:6
+> {
+... "_id" : ObjectId("5ad9156bdc9689471d3112fb"),
+... "name" : "Cindi",
+... "home_state" : "Massachusetts",
+... "lucky_number" : 41,
+... "birthdate" : {
+... "month" : 3,
+... "day" : 15,
+... "year" : 1957
+... }
+... }
+2018-04-19T18:47:23.134-0400 E QUERY    [thread1] SyntaxError: missing ; before statement @(shell):2:6
+> {
+... "_id" : ObjectId("5ad91583dc9689471d3112fc"),
+... "name" : "Maine",
+... "home_state" : "Rhode Island",
+... "lucky_number" : 10101,
+... "birthdate" : {
+... "month" : 12,
+... "day" : 15,
+... "year" : 1999
+... }
+... }
+2018-04-19T18:47:23.136-0400 E QUERY    [thread1] SyntaxError: missing ; before statement @(shell):2:6
+> > db.students.find({home_state: "California"})
+2018-04-19T18:47:23.220-0400 E QUERY    [thread1] SyntaxError: expected expression, got '>' @(shell):1:0
+> > db.students.find({home_state: "Washington"})
+2018-04-19T18:47:23.221-0400 E QUERY    [thread1] SyntaxError: expected expression, got '>' @(shell):1:0
+> > db.students.find({ $or: [ {home_state: "Californoia"}, {home_state: "Washington
+2018-04-19T18:47:23.222-0400 E QUERY    [thread1] SyntaxError: expected expression, got '>' @(shell):1:0
+> 2018-04-19T18:22:57.299-0400 E QUERY    [thread1] SyntaxError: unterminated string literal @(shell):1:68
+2018-04-19T18:47:23.223-0400 E QUERY    [thread1] SyntaxError: identifier starts immediately after numeric literal @(shell):1:8
+> > db.students.find({ $or: [ {home_state: "Californoia"}, {home_state: "Washington"}]})
+2018-04-19T18:47:23.224-0400 E QUERY    [thread1] SyntaxError: expected expression, got '>' @(shell):1:0
+> > db.students.find({ $or: [ {home_state: "Californoia"}, {home_state: "Washington", home_state: "Massachusetts" }]})
+2018-04-19T18:47:23.224-0400 E QUERY    [thread1] SyntaxError: expected expression, got '>' @(shell):1:0
+> { "_id" : ObjectId("5ad914ffdc9689471d3112f8"), "name" : "Joe", "home_state" : "Massachusetts", "lucky_number" : 15, "birthdate" : { "month" : 3, "day" : 15, "year" : 1977 } }
+2018-04-19T18:47:23.226-0400 E QUERY    [thread1] SyntaxError: missing ; before statement @(shell):1:8
+> { "_id" : ObjectId("5ad9156bdc9689471d3112fb"), "name" : "Cindi", "home_state" : "Massachusetts", "lucky_number" : 41, "birthdate" : { "month" : 3, "day" : 15, "year" : 1957 } }
+2018-04-19T18:47:23.228-0400 E QUERY    [thread1] SyntaxError: missing ; before statement @(shell):1:8
+> > db.students.find({ $or: [ {home_state: "Californoia"}, {home_state: "Washington", home_state: "Massachusetts" }]}).pretty()
+2018-04-19T18:47:23.229-0400 E QUERY    [thread1] SyntaxError: expected expression, got '>' @(shell):1:0
+> {
+... "_id" : ObjectId("5ad914ffdc9689471d3112f8"),
+... "name" : "Joe",
+... "home_state" : "Massachusetts",
+... "lucky_number" : 15,
+... "birthdate" : {
+... "month" : 3,
+... "day" : 15,
+... "year" : 1977
+... }
+... }
+2018-04-19T18:47:23.323-0400 E QUERY    [thread1] SyntaxError: missing ; before statement @(shell):2:6
+> {
+... "_id" : ObjectId("5ad9156bdc9689471d3112fb"),
+... "name" : "Cindi",
+... "home_state" : "Massachusetts",
+... "lucky_number" : 41,
+... "birthdate" : {
+... "month" : 3,
+... "day" : 15,
+... "year" : 1957
+... }
+... }
+2018-04-19T18:47:23.326-0400 E QUERY    [thread1] SyntaxError: missing ; before statement @(shell):2:6
+> > db.students.find( { luckey_number: { $gte: 3 } })
+2018-04-19T18:47:23.327-0400 E QUERY    [thread1] SyntaxError: expected expression, got '>' @(shell):1:0
+> > db.students.find( { lucky_number: { $gte: 3 } })
+2018-04-19T18:47:23.328-0400 E QUERY    [thread1] SyntaxError: expected expression, got '>' @(shell):1:0
+> { "_id" : ObjectId("5ad914dbdc9689471d3112f7"), "name" : "Corey", "home_state" : "New Hampshire", "lucky_number" : 14, "birthday" : { "month" : 3, "day" : 14, "year" : 1988 } }
+2018-04-19T18:47:23.329-0400 E QUERY    [thread1] SyntaxError: missing ; before statement @(shell):1:8
+> { "_id" : ObjectId("5ad914ffdc9689471d3112f8"), "name" : "Joe", "home_state" : "Massachusetts", "lucky_number" : 15, "birthdate" : { "month" : 3, "day" : 15, "year" : 1977 } }
+2018-04-19T18:47:23.331-0400 E QUERY    [thread1] SyntaxError: missing ; before statement @(shell):1:8
+> { "_id" : ObjectId("5ad91528dc9689471d3112f9"), "name" : "José", "home_state" : "Vermont", "lucky_number" : 16, "birthdate" : { "day" : 5, "month" : 12, "year" : 1924 } }
+2018-04-19T18:47:23.332-0400 E QUERY    [thread1] SyntaxError: missing ; before statement @(shell):1:8
+> { "_id" : ObjectId("5ad91555dc9689471d3112fa"), "name" : "Jasper", "home_state" : "Connecticut", "lucky_number" : 61, "birthdate" : { "month" : 1, "day" : 1, "year" : 1111 } }
+2018-04-19T18:47:23.421-0400 E QUERY    [thread1] SyntaxError: missing ; before statement @(shell):1:8
+> { "_id" : ObjectId("5ad9156bdc9689471d3112fb"), "name" : "Cindi", "home_state" : "Massachusetts", "lucky_number" : 41, "birthdate" : { "month" : 3, "day" : 15, "year" : 1957 } }
+2018-04-19T18:47:23.423-0400 E QUERY    [thread1] SyntaxError: missing ; before statement @(shell):1:8
+> { "_id" : ObjectId("5ad91583dc9689471d3112fc"), "name" : "Maine", "home_state" : "Rhode Island", "lucky_number" : 10101, "birthdate" : { "month" : 12, "day" : 15, "year" : 1999 } }
+2018-04-19T18:47:23.425-0400 E QUERY    [thread1] SyntaxError: missing ; before statement @(shell):1:8
+> > db.students.find( { lucky_number: { $gte: 3 } }).pretty()
+2018-04-19T18:47:23.425-0400 E QUERY    [thread1] SyntaxError: expected expression, got '>' @(shell):1:0
+> {
+... "_id" : ObjectId("5ad914dbdc9689471d3112f7"),
+... "name" : "Corey",
+... "home_state" : "New Hampshire",
+... "lucky_number" : 14,
+... "birthday" : {
+... "month" : 3,
+... "day" : 14,
+... "year" : 1988
+... }
+... }
+2018-04-19T18:47:23.428-0400 E QUERY    [thread1] SyntaxError: missing ; before statement @(shell):2:6
+> {
+... "_id" : ObjectId("5ad914ffdc9689471d3112f8"),
+... "name" : "Joe",
+... "home_state" : "Massachusetts",
+... "lucky_number" : 15,
+... "birthdate" : {
+... "month" : 3,
+... "day" : 15,
+... "year" : 1977
+... }
+... }
+2018-04-19T18:47:23.430-0400 E QUERY    [thread1] SyntaxError: missing ; before statement @(shell):2:6
+> {
+... "_id" : ObjectId("5ad91528dc9689471d3112f9"),
+... "name" : "José",
+... "home_state" : "Vermont",
+... "lucky_number" : 16,
+... "birthdate" : {
+... "day" : 5,
+... "month" : 12,
+... "year" : 1924
+... }
+... }
+2018-04-19T18:47:23.521-0400 E QUERY    [thread1] SyntaxError: missing ; before statement @(shell):2:6
+> {
+... "_id" : ObjectId("5ad91555dc9689471d3112fa"),
+... "name" : "Jasper",
+... "home_state" : "Connecticut",
+... "lucky_number" : 61,
+... "birthdate" : {
+... "month" : 1,
+... "day" : 1,
+... "year" : 1111
+... }
+... }
+2018-04-19T18:47:23.526-0400 E QUERY    [thread1] SyntaxError: missing ; before statement @(shell):2:6
+> {
+... "_id" : ObjectId("5ad9156bdc9689471d3112fb"),
+... "name" : "Cindi",
+... "home_state" : "Massachusetts",
+... "lucky_number" : 41,
+... "birthdate" : {
+... "month" : 3,
+... "day" : 15,
+... "year" : 1957
+... }
+... }
+2018-04-19T18:47:23.529-0400 E QUERY    [thread1] SyntaxError: missing ; before statement @(shell):2:6
+> {
+... "_id" : ObjectId("5ad91583dc9689471d3112fc"),
+... "name" : "Maine",
+... "home_state" : "Rhode Island",
+... "lucky_number" : 10101,
+... "birthdate" : {
+... "month" : 12,
+... "day" : 15,
+... "year" : 1999
+... }
+... }
+2018-04-19T18:47:23.532-0400 E QUERY    [thread1] SyntaxError: missing ; before statement @(shell):2:6
+> > db.students.find( { lucky_number: { $lte: 10 } }).pretty()
+2018-04-19T18:47:23.533-0400 E QUERY    [thread1] SyntaxError: expected expression, got '>' @(shell):1:0
+> > db.students.find( { lucky_number: {$and [{ $gte: 1 }, { $lte: 10 }]}).pretty()
+... ...
+... ... ^C
+...
+... > db.students.find( { lucky_number: {$and [{ $gte: 1 }, { $lte: 10 }]}).pretty()
+... ... )
+2018-04-19T18:47:23.535-0400 E QUERY    [thread1] SyntaxError: expected expression, got '>' @(shell):1:0
+> 2018-04-19T18:25:13.233-0400 E QUERY    [thread1] SyntaxError: missing : after property id @(shell):1:40
+2018-04-19T18:47:23.535-0400 E QUERY    [thread1] SyntaxError: identifier starts immediately after numeric literal @(shell):1:8
+> > db.students.find( { lucky_number: {$and: [{ $gte: 1 }, { $lte: 10 }]}).pretty() )
+2018-04-19T18:47:23.621-0400 E QUERY    [thread1] SyntaxError: expected expression, got '>' @(shell):1:0
+> 2018-04-19T18:25:20.804-0400 E QUERY    [thread1] SyntaxError: missing } after property list @(shell):1:69
+2018-04-19T18:47:23.622-0400 E QUERY    [thread1] SyntaxError: identifier starts immediately after numeric literal @(shell):1:8
+> > db.students.find( { lucky_number: {$and: [{ $gte: 1 }, { $lte: 10 }]}}).pretty()
+2018-04-19T18:47:23.623-0400 E QUERY    [thread1] SyntaxError: expected expression, got '>' @(shell):1:0
+> Error: error: {
+... "ok" : 0,
+... "errmsg" : "unknown operator: $and",
+... "code" : 2,
+... "codeName" : "BadValue"
+... }
+2018-04-19T18:47:23.625-0400 E QUERY    [thread1] SyntaxError: missing ; before statement @(shell):2:5
+> > db.students.find({$and: [{ lucky_number: {$gte: 1 }}, {lucky_number: { $lte: 10 }}]}).pretty()
+2018-04-19T18:47:23.626-0400 E QUERY    [thread1] SyntaxError: expected expression, got '>' @(shell):1:0
+> > db.students.find({$and: [{ lucky_number: {$gte: 1 }}, {lucky_number: { $lte: 20 }}]}).pretty()
+2018-04-19T18:47:23.627-0400 E QUERY    [thread1] SyntaxError: expected expression, got '>' @(shell):1:0
+> {
+... "_id" : ObjectId("5ad914dbdc9689471d3112f7"),
+... "name" : "Corey",
+... "home_state" : "New Hampshire",
+... "lucky_number" : 14,
+... "birthday" : {
+... "month" : 3,
+... "day" : 14,
+... "year" : 1988
+... }
+... }
+2018-04-19T18:47:23.629-0400 E QUERY    [thread1] SyntaxError: missing ; before statement @(shell):2:6
+> {
+... "_id" : ObjectId("5ad914ffdc9689471d3112f8"),
+... "name" : "Joe",
+... "home_state" : "Massachusetts",
+... "lucky_number" : 15,
+... "birthdate" : {
+... "month" : 3,
+... "day" : 15,
+... "year" : 1977
+... }
+... }
+2018-04-19T18:47:23.631-0400 E QUERY    [thread1] SyntaxError: missing ; before statement @(shell):2:6
+> {
+... "_id" : ObjectId("5ad91528dc9689471d3112f9"),
+... "name" : "José",
+... "home_state" : "Vermont",
+... "lucky_number" : 16,
+... "birthdate" : {
+... "day" : 5,
+... "month" : 12,
+... "year" : 1924
+... }
+... }
+2018-04-19T18:47:23.722-0400 E QUERY    [thread1] SyntaxError: missing ; before statement @(shell):2:6
+> > db.students.find().update( $set: { interests: ["coding","brunch","MongoDB"]}})
+2018-04-19T18:47:23.723-0400 E QUERY    [thread1] SyntaxError: expected expression, got '>' @(shell):1:0
+> 2018-04-19T18:28:15.034-0400 E QUERY    [thread1] SyntaxError: missing ) after argument list @(shell):1:31
+2018-04-19T18:47:23.724-0400 E QUERY    [thread1] SyntaxError: identifier starts immediately after numeric literal @(shell):1:8
+> > db.students.find().update({ $set: { interests: ["coding","brunch","MongoDB"]}})
+2018-04-19T18:47:23.725-0400 E QUERY    [thread1] SyntaxError: expected expression, got '>' @(shell):1:0
+> 2018-04-19T18:28:47.074-0400 E QUERY    [thread1] TypeError: db.students.find(...).update is not a function :
+... @(shell):1:1
+2018-04-19T18:47:23.726-0400 E QUERY    [thread1] SyntaxError: identifier starts immediately after numeric literal @(shell):1:8
+> > db.students.update({},{ $set: { interests: ["coding","brunch","MongoDB"]}})
+2018-04-19T18:47:23.727-0400 E QUERY    [thread1] SyntaxError: expected expression, got '>' @(shell):1:0
+> WriteResult({ "nMatched" : 1, "nUpserted" : 0, "nModified" : 1 })
+2018-04-19T18:47:23.728-0400 E QUERY    [thread1] TypeError: bulkResult.writeErrors is undefined :
+WriteResult/this.getWriteError@src/mongo/shell/bulk_api.js:137:1
+WriteResult/this.tojson@src/mongo/shell/bulk_api.js:186:17
+WriteResult/this.toString@src/mongo/shell/bulk_api.js:204:37
+WriteResult/this.shellPrint@src/mongo/shell/bulk_api.js:208:20
+shellPrintHelper@src/mongo/shell/utils.js:549:1
+@(shell2):1:1
+> > db.students.find().pretty()
+2018-04-19T18:47:23.728-0400 E QUERY    [thread1] SyntaxError: expected expression, got '>' @(shell):1:0
+> {
+... "_id" : ObjectId("5ad914dbdc9689471d3112f7"),
+... "name" : "Corey",
+... "home_state" : "New Hampshire",
+... "lucky_number" : 14,
+... "birthday" : {
+... "month" : 3,
+... "day" : 14,
+... "year" : 1988
+... },
+... "interests" : [
+... "coding",
+... "brunch",
+... "MongoDB"
+... ]
+... }
+2018-04-19T18:47:23.731-0400 E QUERY    [thread1] SyntaxError: missing ; before statement @(shell):2:6
+> {
+... "_id" : ObjectId("5ad914ffdc9689471d3112f8"),
+... "name" : "Joe",
+... "home_state" : "Massachusetts",
+... "lucky_number" : 15,
+... "birthdate" : {
+... "month" : 3,
+... "day" : 15,
+... "year" : 1977
+... }
+... }
+2018-04-19T18:47:23.822-0400 E QUERY    [thread1] SyntaxError: missing ; before statement @(shell):2:6
+> {
+... "_id" : ObjectId("5ad91528dc9689471d3112f9"),
+... "name" : "José",
+... "home_state" : "Vermont",
+... "lucky_number" : 16,
+... "birthdate" : {
+... "day" : 5,
+... "month" : 12,
+... "year" : 1924
+... }
+... }
+2018-04-19T18:47:23.825-0400 E QUERY    [thread1] SyntaxError: missing ; before statement @(shell):2:6
+> {
+... "_id" : ObjectId("5ad91555dc9689471d3112fa"),
+... "name" : "Jasper",
+... "home_state" : "Connecticut",
+... "lucky_number" : 61,
+... "birthdate" : {
+... "month" : 1,
+... "day" : 1,
+... "year" : 1111
+... }
+... }
+2018-04-19T18:47:23.829-0400 E QUERY    [thread1] SyntaxError: missing ; before statement @(shell):2:6
+> {
+... "_id" : ObjectId("5ad9156bdc9689471d3112fb"),
+... "name" : "Cindi",
+... "home_state" : "Massachusetts",
+... "lucky_number" : 41,
+... "birthdate" : {
+... "month" : 3,
+... "day" : 15,
+... "year" : 1957
+... }
+... }
+2018-04-19T18:47:23.832-0400 E QUERY    [thread1] SyntaxError: missing ; before statement @(shell):2:6
+> {
+... "_id" : ObjectId("5ad91583dc9689471d3112fc"),
+... "name" : "Maine",
+... "home_state" : "Rhode Island",
+... "lucky_number" : 10101,
+... "birthdate" : {
+... "month" : 12,
+... "day" : 15,
+... "year" : 1999
+... }
+... }
+2018-04-19T18:47:23.834-0400 E QUERY    [thread1] SyntaxError: missing ; before statement @(shell):2:6
+> > db.students.update({},{ $set: { interests: ["coding","brunch","MongoDB"]}},{multi: true})
+2018-04-19T18:47:23.835-0400 E QUERY    [thread1] SyntaxError: expected expression, got '>' @(shell):1:0
+> WriteResult({ "nMatched" : 6, "nUpserted" : 0, "nModified" : 5 })
+2018-04-19T18:47:23.836-0400 E QUERY    [thread1] TypeError: bulkResult.writeErrors is undefined :
+WriteResult/this.getWriteError@src/mongo/shell/bulk_api.js:137:1
+WriteResult/this.tojson@src/mongo/shell/bulk_api.js:186:17
+WriteResult/this.toString@src/mongo/shell/bulk_api.js:204:37
+WriteResult/this.shellPrint@src/mongo/shell/bulk_api.js:208:20
+shellPrintHelper@src/mongo/shell/utils.js:549:1
+@(shell2):1:1
+> > db.students.find().pretty()
+2018-04-19T18:47:23.836-0400 E QUERY    [thread1] SyntaxError: expected expression, got '>' @(shell):1:0
+> {
+... "_id" : ObjectId("5ad914dbdc9689471d3112f7"),
+... "name" : "Corey",
+... "home_state" : "New Hampshire",
+... "lucky_number" : 14,
+... "birthday" : {
+... "month" : 3,
+... "day" : 14,
+... "year" : 1988
+... },
+... "interests" : [
+... "coding",
+... "brunch",
+... "MongoDB"
+... ]
+... }
+2018-04-19T18:47:23.925-0400 E QUERY    [thread1] SyntaxError: missing ; before statement @(shell):2:6
+> {
+... "_id" : ObjectId("5ad914ffdc9689471d3112f8"),
+... "name" : "Joe",
+... "home_state" : "Massachusetts",
+... "lucky_number" : 15,
+... "birthdate" : {
+... "month" : 3,
+... "day" : 15,
+... "year" : 1977
+... },
+... "interests" : [
+... "coding",
+... "brunch",
+... "MongoDB"
+... ]
+... }
+2018-04-19T18:47:23.929-0400 E QUERY    [thread1] SyntaxError: missing ; before statement @(shell):2:6
+> {
+... "_id" : ObjectId("5ad91528dc9689471d3112f9"),
+... "name" : "José",
+... "home_state" : "Vermont",
+... "lucky_number" : 16,
+... "birthdate" : {
+... "day" : 5,
+... "month" : 12,
+... "year" : 1924
+... },
+... "interests" : [
+... "coding",
+... "brunch",
+... "MongoDB"
+... ]
+... }
+2018-04-19T18:47:23.933-0400 E QUERY    [thread1] SyntaxError: missing ; before statement @(shell):2:6
+> {
+... "_id" : ObjectId("5ad91555dc9689471d3112fa"),
+... "name" : "Jasper",
+... "home_state" : "Connecticut",
+... "lucky_number" : 61,
+... "birthdate" : {
+... "month" : 1,
+... "day" : 1,
+... "year" : 1111
+... },
+... "interests" : [
+... "coding",
+... "brunch",
+... "MongoDB"
+... ]
+... }
+2018-04-19T18:47:23.936-0400 E QUERY    [thread1] SyntaxError: missing ; before statement @(shell):2:6
+> {
+... "_id" : ObjectId("5ad9156bdc9689471d3112fb"),
+... "name" : "Cindi",
+... "home_state" : "Massachusetts",
+... "lucky_number" : 41,
+... "birthdate" : {
+... "month" : 3,
+... "day" : 15,
+... "year" : 1957
+... },
+... "interests" : [
+... "coding",
+... "brunch",
+... "MongoDB"
+... ]
+... }
+2018-04-19T18:47:24.025-0400 E QUERY    [thread1] SyntaxError: missing ; before statement @(shell):2:6
+> {
+... "_id" : ObjectId("5ad91583dc9689471d3112fc"),
+... "name" : "Maine",
+... "home_state" : "Rhode Island",
+... "lucky_number" : 10101,
+... "birthdate" : {
+... "month" : 12,
+... "day" : 15,
+... "year" : 1999
+... },
+... "interests" : [
+... "coding",
+... "brunch",
+... "MongoDB"
+... ]
+... }
+2018-04-19T18:47:24.030-0400 E QUERY    [thread1] SyntaxError: missing ; before statement @(shell):2:6
+> > db.students.update({ name: "Cindi"}, { $push: { "interests" : "knittin" }})
+2018-04-19T18:47:24.033-0400 E QUERY    [thread1] SyntaxError: expected expression, got '>' @(shell):1:0
+> WriteResult({ "nMatched" : 1, "nUpserted" : 0, "nModified" : 1 })
+2018-04-19T18:47:24.034-0400 E QUERY    [thread1] TypeError: bulkResult.writeErrors is undefined :
+WriteResult/this.getWriteError@src/mongo/shell/bulk_api.js:137:1
+WriteResult/this.tojson@src/mongo/shell/bulk_api.js:186:17
+WriteResult/this.toString@src/mongo/shell/bulk_api.js:204:37
+WriteResult/this.shellPrint@src/mongo/shell/bulk_api.js:208:20
+shellPrintHelper@src/mongo/shell/utils.js:549:1
+@(shell2):1:1
+> > db.students.update({ name: "Corey"}, { $push: { "interests" : "cats" }})
+2018-04-19T18:47:24.035-0400 E QUERY    [thread1] SyntaxError: expected expression, got '>' @(shell):1:0
+> WriteResult({ "nMatched" : 1, "nUpserted" : 0, "nModified" : 1 })
+2018-04-19T18:47:24.036-0400 E QUERY    [thread1] TypeError: bulkResult.writeErrors is undefined :
+WriteResult/this.getWriteError@src/mongo/shell/bulk_api.js:137:1
+WriteResult/this.tojson@src/mongo/shell/bulk_api.js:186:17
+WriteResult/this.toString@src/mongo/shell/bulk_api.js:204:37
+WriteResult/this.shellPrint@src/mongo/shell/bulk_api.js:208:20
+shellPrintHelper@src/mongo/shell/utils.js:549:1
+@(shell2):1:1
+> > db.students.update({ name: "Jasper"}, { $push: { "interests" : "taxes" }})
+2018-04-19T18:47:24.036-0400 E QUERY    [thread1] SyntaxError: expected expression, got '>' @(shell):1:0
+> WriteResult({ "nMatched" : 1, "nUpserted" : 0, "nModified" : 1 })
+2018-04-19T18:47:24.037-0400 E QUERY    [thread1] TypeError: bulkResult.writeErrors is undefined :
+WriteResult/this.getWriteError@src/mongo/shell/bulk_api.js:137:1
+WriteResult/this.tojson@src/mongo/shell/bulk_api.js:186:17
+WriteResult/this.toString@src/mongo/shell/bulk_api.js:204:37
+WriteResult/this.shellPrint@src/mongo/shell/bulk_api.js:208:20
+shellPrintHelper@src/mongo/shell/utils.js:549:1
+@(shell2):1:1
+> > db.students.update({ name: "Jasper"}, { $pop: { "interests" : "taxes" }})
+2018-04-19T18:47:24.038-0400 E QUERY    [thread1] SyntaxError: expected expression, got '>' @(shell):1:0
+> WriteResult({
+... "nMatched" : 0,
+... "nUpserted" : 0,
+... "nModified" : 0,
+... "writeError" : {
+... "code" : 9,
+... "errmsg" : "Expected a number in: interests: \"taxes\""
+... }
+... })
+2018-04-19T18:47:24.123-0400 E QUERY    [thread1] TypeError: bulkResult.writeErrors is undefined :
+WriteResult/this.getWriteError@src/mongo/shell/bulk_api.js:137:1
+WriteResult/this.tojson@src/mongo/shell/bulk_api.js:186:17
+WriteResult/this.toString@src/mongo/shell/bulk_api.js:204:37
+WriteResult/this.shellPrint@src/mongo/shell/bulk_api.js:208:20
+shellPrintHelper@src/mongo/shell/utils.js:549:1
+@(shell2):1:1
+> > db.students.update({ name: "Jasper"}, { $pull: { array_key: "taxes" }})
+2018-04-19T18:47:24.124-0400 E QUERY    [thread1] SyntaxError: expected expression, got '>' @(shell):1:0
+> WriteResult({ "nMatched" : 1, "nUpserted" : 0, "nModified" : 0 })
+2018-04-19T18:47:24.124-0400 E QUERY    [thread1] TypeError: bulkResult.writeErrors is undefined :
+WriteResult/this.getWriteError@src/mongo/shell/bulk_api.js:137:1
+WriteResult/this.tojson@src/mongo/shell/bulk_api.js:186:17
+WriteResult/this.toString@src/mongo/shell/bulk_api.js:204:37
+WriteResult/this.shellPrint@src/mongo/shell/bulk_api.js:208:20
+shellPrintHelper@src/mongo/shell/utils.js:549:1
+@(shell2):1:1
+> > db.students.find({name:"Jasper"}).pretty()
+2018-04-19T18:47:24.125-0400 E QUERY    [thread1] SyntaxError: expected expression, got '>' @(shell):1:0
+> {
+... "_id" : ObjectId("5ad91555dc9689471d3112fa"),
+... "name" : "Jasper",
+... "home_state" : "Connecticut",
+... "lucky_number" : 61,
+... "birthdate" : {
+... "month" : 1,
+... "day" : 1,
+... "year" : 1111
+... },
+... "interests" : [
+... "coding",
+... "brunch",
+... "MongoDB",
+... "taxes"
+... ]
+... }
+2018-04-19T18:47:24.132-0400 E QUERY    [thread1] SyntaxError: missing ; before statement @(shell):2:6
+> > db.students.update({ name: "Jasper"}, { $pull: { interests: "taxes" }})
+2018-04-19T18:47:24.133-0400 E QUERY    [thread1] SyntaxError: expected expression, got '>' @(shell):1:0
+> WriteResult({ "nMatched" : 1, "nUpserted" : 0, "nModified" : 1 })
+2018-04-19T18:47:24.133-0400 E QUERY    [thread1] TypeError: bulkResult.writeErrors is undefined :
+WriteResult/this.getWriteError@src/mongo/shell/bulk_api.js:137:1
+WriteResult/this.tojson@src/mongo/shell/bulk_api.js:186:17
+WriteResult/this.toString@src/mongo/shell/bulk_api.js:204:37
+WriteResult/this.shellPrint@src/mongo/shell/bulk_api.js:208:20
+shellPrintHelper@src/mongo/shell/utils.js:549:1
+@(shell2):1:1
+> > db.students.find({name:"Jasper"}).pretty()
+2018-04-19T18:47:24.134-0400 E QUERY    [thread1] SyntaxError: expected expression, got '>' @(shell):1:0
+> {
+... "_id" : ObjectId("5ad91555dc9689471d3112fa"),
+... "name" : "Jasper",
+... "home_state" : "Connecticut",
+... "lucky_number" : 61,
+... "birthdate" : {
+... "month" : 1,
+... "day" : 1,
+... "year" : 1111
+... },
+... "interests" : [
+... "coding",
+... "brunch",
+... "MongoDB"
+... ]
+... }
+2018-04-19T18:47:24.138-0400 E QUERY    [thread1] SyntaxError: missing ; before statement @(shell):2:6
+> > db.students.removeMany( { $or: [ {home_state: "California" }, {home_state: "Washington"}]})
+2018-04-19T18:47:24.139-0400 E QUERY    [thread1] SyntaxError: expected expression, got '>' @(shell):1:0
+> 2018-04-19T18:37:56.696-0400 E QUERY    [thread1] TypeError: db.students.removeMany is not a function :
+... @(shell):1:1
+2018-04-19T18:47:24.222-0400 E QUERY    [thread1] SyntaxError: identifier starts immediately after numeric literal @(shell):1:8
+> > db.students.deleteMany( { $or: [ {home_state: "California" }, {home_state: "Washington"}]})
+2018-04-19T18:47:24.223-0400 E QUERY    [thread1] SyntaxError: expected expression, got '>' @(shell):1:0
+> { "acknowledged" : true, "deletedCount" : 0 }
+2018-04-19T18:47:24.224-0400 E QUERY    [thread1] SyntaxError: missing ; before statement @(shell):1:17
+> > db.students.remove({name: "Jasper"})
+2018-04-19T18:47:24.225-0400 E QUERY    [thread1] SyntaxError: expected expression, got '>' @(shell):1:0
+> WriteResult({ "nRemoved" : 1 })
+2018-04-19T18:47:24.225-0400 E QUERY    [thread1] TypeError: bulkResult.writeErrors is undefined :
+WriteResult/this.getWriteError@src/mongo/shell/bulk_api.js:137:1
+WriteResult/this.tojson@src/mongo/shell/bulk_api.js:186:17
+WriteResult/this.toString@src/mongo/shell/bulk_api.js:204:37
+WriteResult/this.shellPrint@src/mongo/shell/bulk_api.js:208:20
+shellPrintHelper@src/mongo/shell/utils.js:549:1
+@(shell2):1:1
+> > db.students.deleteOne({ lucky_number: { $gt: 5}})
+2018-04-19T18:47:24.226-0400 E QUERY    [thread1] SyntaxError: expected expression, got '>' @(shell):1:0
+> { "acknowledged" : true, "deletedCount" : 1 }
+2018-04-19T18:47:24.227-0400 E QUERY    [thread1] SyntaxError: missing ; before statement @(shell):1:17
+> > db.students.updateMany({},{ $set: { number_of_belts: 0 }})
+2018-04-19T18:47:24.227-0400 E QUERY    [thread1] SyntaxError: expected expression, got '>' @(shell):1:0
+> { "acknowledged" : true, "matchedCount" : 4, "modifiedCount" : 4 }
+2018-04-19T18:47:24.228-0400 E QUERY    [thread1] SyntaxError: missing ; before statement @(shell):1:17
+> > db.students.find().pretty()
+2018-04-19T18:47:24.229-0400 E QUERY    [thread1] SyntaxError: expected expression, got '>' @(shell):1:0
+> {
+... "_id" : ObjectId("5ad914ffdc9689471d3112f8"),
+... "name" : "Joe",
+... "home_state" : "Massachusetts",
+... "lucky_number" : 15,
+... "birthdate" : {
+... "month" : 3,
+... "day" : 15,
+... "year" : 1977
+... },
+... "interests" : [
+... "coding",
+... "brunch",
+... "MongoDB"
+... ],
+... "number_of_belts" : 0
+... }
+2018-04-19T18:47:24.237-0400 E QUERY    [thread1] SyntaxError: missing ; before statement @(shell):2:6
+> {
+... "_id" : ObjectId("5ad91528dc9689471d3112f9"),
+... "name" : "José",
+... "home_state" : "Vermont",
+... "lucky_number" : 16,
+... "birthdate" : {
+... "day" : 5,
+... "month" : 12,
+... "year" : 1924
+... },
+... "interests" : [
+... "coding",
+... "brunch",
+... "MongoDB"
+... ],
+... "number_of_belts" : 0
+... }
+2018-04-19T18:47:24.324-0400 E QUERY    [thread1] SyntaxError: missing ; before statement @(shell):2:6
+> {
+... "_id" : ObjectId("5ad9156bdc9689471d3112fb"),
+... "name" : "Cindi",
+... "home_state" : "Massachusetts",
+... "lucky_number" : 41,
+... "birthdate" : {
+... "month" : 3,
+... "day" : 15,
+... "year" : 1957
+... },
+... "interests" : [
+... "coding",
+... "brunch",
+... "MongoDB",
+... "knittin"
+... ],
+... "number_of_belts" : 0
+... }
+2018-04-19T18:47:24.329-0400 E QUERY    [thread1] SyntaxError: missing ; before statement @(shell):2:6
+> {
+... "_id" : ObjectId("5ad91583dc9689471d3112fc"),
+... "name" : "Maine",
+... "home_state" : "Rhode Island",
+... "lucky_number" : 10101,
+... "birthdate" : {
+... "month" : 12,
+... "day" : 15,
+... "year" : 1999
+... },
+... "interests" : [
+... "coding",
+... "brunch",
+... "MongoDB"
+... ],
+... "number_of_belts" : 0
+... }
+2018-04-19T18:47:24.334-0400 E QUERY    [thread1] SyntaxError: missing ; before statement @(shell):2:6
+> > db.students.updateMany({},{ $unset: { lucky_number: "" }})
+2018-04-19T18:47:24.335-0400 E QUERY    [thread1] SyntaxError: expected expression, got '>' @(shell):1:0
+> { "acknowledged" : true, "matchedCount" : 4, "modifiedCount" : 4 }
+2018-04-19T18:47:24.335-0400 E QUERY    [thread1] SyntaxError: missing ; before statement @(shell):1:17
+> > db.students.find().pretty()
+2018-04-19T18:47:24.336-0400 E QUERY    [thread1] SyntaxError: expected expression, got '>' @(shell):1:0
+> {
+... "_id" : ObjectId("5ad914ffdc9689471d3112f8"),
+... "name" : "Joe",
+... "home_state" : "Massachusetts",
+... "birthdate" : {
+... "month" : 3,
+... "day" : 15,
+... "year" : 1977
+... },
+... "interests" : [
+... "coding",
+... "brunch",
+... "MongoDB"
+... ],
+... "number_of_belts" : 0
+... }
+2018-04-19T18:47:24.422-0400 E QUERY    [thread1] SyntaxError: missing ; before statement @(shell):2:6
+> {
+... "_id" : ObjectId("5ad91528dc9689471d3112f9"),
+... "name" : "José",
+... "home_state" : "Vermont",
+... "birthdate" : {
+... "day" : 5,
+... "month" : 12,
+... "year" : 1924
+... },
+... "interests" : [
+... "coding",
+... "brunch",
+... "MongoDB"
+... ],
+... "number_of_belts" : 0
+... }
+2018-04-19T18:47:24.427-0400 E QUERY    [thread1] SyntaxError: missing ; before statement @(shell):2:6
+> {
+... "_id" : ObjectId("5ad9156bdc9689471d3112fb"),
+... "name" : "Cindi",
+... "home_state" : "Massachusetts",
+... "birthdate" : {
+... "month" : 3,
+... "day" : 15,
+... "year" : 1957
+... },
+... "interests" : [
+... "coding",
+... "brunch",
+... "MongoDB",
+... "knittin"
+... ],
+... "number_of_belts" : 0
+... }
+2018-04-19T18:47:24.432-0400 E QUERY    [thread1] SyntaxError: missing ; before statement @(shell):2:6
+> {
+... "_id" : ObjectId("5ad91583dc9689471d3112fc"),
+... "name" : "Maine",
+... "home_state" : "Rhode Island",
+... "birthdate" : {
+... "month" : 12,
+... "day" : 15,
+... "year" : 1999
+... },
+... "interests" : [
+... "coding",
+... "brunch",
+... "MongoDB"
+... ],
+... "number_of_belts" : 0
+... }
+2018-04-19T18:47:24.435-0400 E QUERY    [thread1] SyntaxError: missing ; before statement @(shell):2:6
+> > db.students.updateMany({},{ $set: {updated_on: $currentDate }})
+2018-04-19T18:47:24.435-0400 E QUERY    [thread1] SyntaxError: expected expression, got '>' @(shell):1:0
+> 2018-04-19T18:43:28.048-0400 E QUERY    [thread1] ReferenceError: $currentDate is not defined :
+... @(shell):1:36
+2018-04-19T18:47:24.436-0400 E QUERY    [thread1] SyntaxError: identifier starts immediately after numeric literal @(shell):1:8
+> > db.students.updateMany({},{ $set: { $currentDate: { updated_on: {$type: "timestamp }}}})
+2018-04-19T18:47:24.522-0400 E QUERY    [thread1] SyntaxError: expected expression, got '>' @(shell):1:0
+> 2018-04-19T18:44:48.419-0400 E QUERY    [thread1] SyntaxError: unterminated string literal @(shell):1:72
+2018-04-19T18:47:24.523-0400 E QUERY    [thread1] SyntaxError: identifier starts immediately after numeric literal @(shell):1:8
+> > db.students.updateMany({},{ $set: { $currentDate: { updated_on: {$type: "timestamp" }}}})
+2018-04-19T18:47:24.524-0400 E QUERY    [thread1] SyntaxError: expected expression, got '>' @(shell):1:0
+> 2018-04-19T18:44:52.705-0400 E QUERY    [thread1] WriteError: The dollar ($) prefixed field '$currentDate' in '$currentDate' is not valid for storage. :
+... WriteError({
+... "index" : 0,
+... "code" : 52,
+... "errmsg" : "The dollar ($) prefixed field '$currentDate' in '$currentDate' is not valid for storage.",
+... "op" : {
+... "q" : {
+...
+... },
+... "u" : {
+... "$set" : {
+... "$currentDate" : {
+... "updated_on" : {
+... "$type" : "timestamp"
+... }
+... }
+... }
+... },
+... "multi" : true,
+... "upsert" : false
+... }
+... })
+2018-04-19T18:47:24.529-0400 E QUERY    [thread1] SyntaxError: identifier starts immediately after numeric literal @(shell):1:8
+> WriteError@src/mongo/shell/bulk_api.js:466:48
+2018-04-19T18:47:24.530-0400 E QUERY    [thread1] SyntaxError: illegal character @(shell):1:10
+> Bulk/mergeBatchResults@src/mongo/shell/bulk_api.js:846:49
+2018-04-19T18:47:24.531-0400 E QUERY    [thread1] SyntaxError: illegal character @(shell):1:22
+> Bulk/executeBatch@src/mongo/shell/bulk_api.js:910:13
+2018-04-19T18:47:24.531-0400 E QUERY    [thread1] SyntaxError: illegal character @(shell):1:17
+> Bulk/this.execute@src/mongo/shell/bulk_api.js:1154:21
+2018-04-19T18:47:24.532-0400 E QUERY    [thread1] SyntaxError: illegal character @(shell):1:17
+> DBCollection.prototype.updateMany@src/mongo/shell/crud_api.js:655:17
+2018-04-19T18:47:24.532-0400 E QUERY    [thread1] SyntaxError: illegal character @(shell):1:33
+> @(shell):1:1
+2018-04-19T18:47:24.533-0400 E QUERY    [thread1] SyntaxError: illegal character @(shell):1:0
+> > db.students.updateMany({},{ $currentDate: { updated_on: {$type: "timestamp" }}})
+2018-04-19T18:47:24.622-0400 E QUERY    [thread1] SyntaxError: expected expression, got '>' @(shell):1:0
+> { "acknowledged" : true, "matchedCount" : 4, "modifiedCount" : 4 }
+2018-04-19T18:47:24.623-0400 E QUERY    [thread1] SyntaxError: missing ; before statement @(shell):1:17
+> > db.students.find().pretty()
+2018-04-19T18:47:24.624-0400 E QUERY    [thread1] SyntaxError: expected expression, got '>' @(shell):1:0
+> {
+... "_id" : ObjectId("5ad914ffdc9689471d3112f8"),
+... "name" : "Joe",
+... "home_state" : "Massachusetts",
+... "birthdate" : {
+... "month" : 3,
+... "day" : 15,
+... "year" : 1977
+... },
+... "interests" : [
+... "coding",
+... "brunch",
+... "MongoDB"
+... ],
+... "number_of_belts" : 0,
+... "updated_on" : Timestamp(1524177954, 1)
+... }
+2018-04-19T18:47:24.629-0400 E QUERY    [thread1] SyntaxError: missing ; before statement @(shell):2:6
+> {
+... "_id" : ObjectId("5ad91528dc9689471d3112f9"),
+... "name" : "José",
+... "home_state" : "Vermont",
+... "birthdate" : {
+... "day" : 5,
+... "month" : 12,
+... "year" : 1924
+... },
+... "interests" : [
+... "coding",
+... "brunch",
+... "MongoDB"
+... ],
+... "number_of_belts" : 0,
+... "updated_on" : Timestamp(1524177954, 2)
+... }
+2018-04-19T18:47:24.632-0400 E QUERY    [thread1] SyntaxError: missing ; before statement @(shell):2:6
+> {
+... "_id" : ObjectId("5ad9156bdc9689471d3112fb"),
+... "name" : "Cindi",
+... "home_state" : "Massachusetts",
+... "birthdate" : {
+... "month" : 3,
+... "day" : 15,
+... "year" : 1957
+... },
+... "interests" : [
+... "coding",
+... "brunch",
+... "MongoDB",
+... "knittin"
+... ],
+... "number_of_belts" : 0,
+... "updated_on" : Timestamp(1524177954, 3)
+... }
+2018-04-19T18:47:24.723-0400 E QUERY    [thread1] SyntaxError: missing ; before statement @(shell):2:6
+> {
+... "_id" : ObjectId("5ad91583dc9689471d3112fc"),
+... "name" : "Maine",
+... "home_state" : "Rhode Island",
+... "birthdate" : {
+... "month" : 12,
+... "day" : 15,
+... "year" : 1999
+... },
+... "interests" : [
+... "coding",
+... "brunch",
+... "MongoDB"
+... ],
+... "number_of_belts" : 0,
+... "updated_on" : Timestamp(1524177954, 4)
