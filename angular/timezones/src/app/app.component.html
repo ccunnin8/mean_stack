@@ -1,0 +1,14 @@
+<!--The content below is only a placeholder and can be replaced.-->
+<div style="text-align:center">
+  <h1>
+    Welcome to {{ title }}!
+  </h1>
+  <div class="buttons">
+    <button (click)="changeTime('PST')" [ngClass]="{'active': PST}">PST</button>
+    <button (click)="changeTime('MST')" [ngClass]="{'active': MST}" >MST</button>
+    <button (click)="changeTime('CST')" [ngClass]="{'active': CST}">CST</button>
+    <button (click)="changeTime('EST')" [ngClass]="{'active': EST}">EST</button>
+    <button (click) = "clear()">Clear</button>
+  </div>
+  <div class="time">{{ date | date:'medium' }}</div>
+</div>
