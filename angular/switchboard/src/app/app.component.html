@@ -1,0 +1,12 @@
+<!--The content below is only a placeholder and can be replaced.-->
+<div style="text-align:center">
+  <h1>
+  {{ title }}
+  </h1>
+  <div class="boxes">
+    <div class="switch" *ngFor="let x of keys" [ngClass]="{'off': !switches[x], 'on': switches[x]}" (click)="toggle(x)">
+      <button *ngIf="switches[x]">On</button>
+      <button *ngIf="!switches[x]">Off</button>
+    </div>
+  </div>
+</div>
