@@ -1,0 +1,16 @@
+.asterisk::before {
+  content: "*";
+  color: red;
+}
+.container {
+  width: 50%;
+  margin: 0 auto;
+}
+
+.green {
+  color: green;
+}
+
+span {
+  color: red;
+}
