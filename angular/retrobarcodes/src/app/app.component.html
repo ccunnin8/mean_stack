@@ -3,5 +3,6 @@
   <h1>
   {{ title }}
   </h1>
+  <button (click)="onButtonClick()">Click me!</button><br>
   <div class="block" *ngFor="let n of colors" [ngStyle]="{ 'background-color': n }">
 </div>

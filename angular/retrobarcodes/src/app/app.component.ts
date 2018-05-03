@@ -25,4 +25,7 @@ for (let i = 0; i < 10; i++){
 export class AppComponent {
   title: String = 'Retro Barcode Generator';
   colors: Array<String> = colors;
+  onButtonClick(): void{
+    alert("TEST");
+  };
 }
