@@ -1,0 +1,13 @@
+<!--The content below is only a placeholder and can be replaced.-->
+<div style="text-align:center">
+  <h1>
+    {{ title }}
+    <p>
+      {{ currency | currency:"USD":true }} USD compared to 4 other countries
+    </p>
+    <p> {{ cny | currency:"EUR":true }} </p>
+    <p> {{ eur | currency:"CNY":true }} </p>
+    <p> {{ rub | currency:"RUB":true }} </p>
+    <p>{{ gbp | currency:"GBP":true }} </p>
+  </h1>
+</div>
