@@ -1,0 +1,45 @@
+<!--The content below is only a placeholder and can be replaced.-->
+<div style="text-align:center">
+  <h1>
+    Request a pet sitter
+  </h1>
+</div>
+<div class="container">
+  <form (submit)="onSubmit()">
+    <p>
+      <label for="first_name">First name: </label>
+      <input type="text" name="first_name" value="" id="first_name" [(ngModel)]="petsitter.first_name">
+    </p>
+    <p>
+      <label for="last_name">Last name: </label>
+      <input type="text" name="last_name" value="" id="last_name" #last_name="ngModel" [(ngModel)]="petsitter.last_name">
+    </p>
+    <p>
+      <label for="email">Email: </label>
+      <input type="text" name="email" value="" id="email" [(ngModel)]="petsitter.email">
+    </p>
+    <p>
+      <label for="pet_name">Pet's name: </label>
+      <input type="text" name="pet_name" value="" id="pet_name" [(ngModel)]="petsitter.pet_name">
+    </p>
+    <p>
+      <label for="Pet type">Pet type: </label>
+      <input type="text" name="pet_type" value="" id="pet_type" [(ngModel)]="petsitter.pet_type">
+    </p>
+    <p>
+      <label for="start_date">Start Date: </label>
+      <input type="date" name="start_date" value="" id="start_date" [(ngModel)]="petsitter.start_date">
+    </p>
+    <p>
+      <label for="end_date">End date: </label>
+      <input type="date" name="end_date" value="" id="end_date" [(ngModel)]="petsitter.end_date">
+    </p>
+    <p>
+      <label for="notes">Optional notes: </label>
+      <textarea name="notes" rows="8" cols="80" [(ngModel)]="petsitter.notes"></textarea>
+    </p>
+    <p>
+      <input type="submit" name="" value="Submit">
+    </p>
+  </form>
+</div>
