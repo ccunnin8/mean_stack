@@ -1,0 +1,15 @@
+<!--The content below is only a placeholder and can be replaced.-->
+<div style="text-align:center">
+  <h1>
+    One Mile Conversion
+  </h1>
+  <div class="buttons">
+    <button [ngClass] = "{ 'active': active === 'yards' }" (click)='convert("y")'>Yards</button>
+    <button [ngClass] = "{ 'active': active === 'feet' }" (click)="convert('f')">Feet</button>
+    <button [ngClass] = "{ 'active': active === 'inches' }" (click)="convert('i')">Inches</button>
+    <button [ngClass] = "{ 'active': active === 'kilometers' }" (click)="convert('k')">Kms</button>
+    <button [ngClass] = "{ 'active': active === 'meters' }" (click)="convert('m')">Meters</button>
+    <button (click)="clear()">Clear</button>
+  </div>
+  <h2>One mile is {{ amount }} {{ units }}</h2>
+</div>
