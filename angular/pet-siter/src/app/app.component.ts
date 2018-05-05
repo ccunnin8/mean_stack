@@ -8,8 +8,13 @@ import { Petsitter } from './petsitter';
 })
 export class AppComponent {
   title = 'app';
-  petsitter: Petsitter = new Petsitter();
-  onSubmit(): void {
+  petsitter: Petsitter;
+  request: Petsitter;
+  constructor() {
+    this.petsitter = new Petsitter();
+  }
+  onSubmit() {
+    this.request = this.petsitter;
     this.petsitter = new Petsitter();
   }
 }
