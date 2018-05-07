@@ -1,0 +1,7 @@
+div {
+  width: 49%;
+  display: inline-block;
+  height: 100%;
+  border: 1px solid black;
+  vertical-align: top;
+}
