@@ -1,12 +1,13 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 
 @Component({
-  selector: 'app-human',
+  selector: 'subcomponent',
   templateUrl: './human.component.html',
   styleUrls: ['./human.component.css']
 })
 export class HumanComponent implements OnInit {
-
+  @Input() title: string;
+  @Input() power_level: number;
   constructor() { }
 
   ngOnInit() {
