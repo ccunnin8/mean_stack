@@ -6,8 +6,8 @@ import { Component, OnInit, Input } from '@angular/core';
   styleUrls: ['./quote.component.css']
 })
 export class QuoteComponent implements OnInit {
-  @Input() author: string;
   @Input() quote: string;
+  @Input() author: string;
   constructor() { }
 
   ngOnInit() {

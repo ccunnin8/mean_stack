@@ -7,14 +7,15 @@ import { Quote } from './quote';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
-  quotes: [Quote];
+  quotes: Array<Quote>;
   new_quote: Quote;
   constructor(){
     this.new_quote = new Quote();
+    this.quotes = [];
   }
-  addQuote(){
+  addQuote() {
     console.log(this.new_quote);
-    // this.quotes.push(this.quote);
-    this.new_quote = new Quote("","");
+    this.quotes.push(this.new_quote);
+    this.new_quote = new Quote();
   }
 }

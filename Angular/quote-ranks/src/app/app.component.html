@@ -3,12 +3,12 @@
   <h1>Add a quote</h1>
   <form #form="ngForm" (submit)="addQuote()">
     <textarea name="quote" rows="8" cols="80" minlength="4"
-    required [(ngModel)]="new_quote.quote"></textarea>
+    required [(ngModel)]="new_quote.quote" #quote="ngModel"></textarea>
+    <span *ngIf="quote.errors"> Quote is required</span>
     <p>
       <label for="author">Author</label>
-      <input type="text" name="author" value="" required minlength="1"
-      id="author" [(ngModel)]="new_quote.author"
-      >
+      <input type="text" name="author" value="" required minlength="1" id="author" #author="ngModel" [(ngModel)]="new_quote.author">
+      <span *ngIf="author.errors"> Author is required</span>
     </p>
     <p>
       <input *ngIf="!form.valid" type="submit" name="" value="Add a quote" disabled>
@@ -16,5 +16,6 @@
     </p>
   </form>
   <h1>Quotes List</h1>
-  {{ form | json }}
+  <hr>
+  <app-quote *ngFor="let quote of quotes" [author]="quote.author" [quote]="quote.quote"></app-quote>
 </div>

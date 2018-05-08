@@ -5,10 +5,11 @@ import { FormsModule } from "@angular/forms";
 import { AppComponent } from './app.component';
 import { QuoteComponent } from './quote/quote.component';
 
+
 @NgModule({
   declarations: [
     AppComponent,
-    QuoteComponent
+    QuoteComponent,
   ],
   imports: [
     BrowserModule,
