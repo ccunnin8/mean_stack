@@ -17,5 +17,5 @@
   </form>
   <h1>Quotes List</h1>
   <hr>
-  <app-quote *ngFor="let quote of quotes" [author]="quote.author" [quote]="quote.quote"></app-quote>
+  <app-quote *ngFor="let quote of quotes" [quote]="quote" (update)="update($event)" (delete)="delete($event)"></app-quote>
 </div>

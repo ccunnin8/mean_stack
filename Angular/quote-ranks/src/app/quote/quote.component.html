@@ -1,6 +1,16 @@
-<div>
-  <blockquote>
-    {{ quote }}
-  </blockquote>
-  <p> - {{ author }}</p>
+<div class="container">
+  <div>
+    <blockquote>
+      {{ quote.quote }}
+    </blockquote>
+    <p> - {{ quote.author }}</p>
+  </div>
+  <div>
+    {{ quote.votes }}
+  </div>
+  <div class="buttons">
+    <button type="button" name="button" (click)="voteUp()" id="up">Vote Up</button>
+    <button type="button" name="button" (click)="voteDown()" id="down">Vote Down</button>
+    <button type="button" name="button" (click)="delete_quote()" id="delete">Delete</button>
+  </div>
 </div>
