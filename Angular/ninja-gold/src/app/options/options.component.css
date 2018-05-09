@@ -1,0 +1,11 @@
+.container {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  width: 80%;
+  margin: 0 auto 10px auto;
+  padding: 2px;
+}
+.option {
+  text-align: center;
+}
