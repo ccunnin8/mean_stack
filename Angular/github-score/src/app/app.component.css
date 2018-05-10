@@ -1,0 +1,21 @@
+.container {
+  width: 90%;
+  margin: 0 auto;
+}
+.container div {
+  width: 49%;
+  display: inline-block;
+  vertical-align: top;
+}
+.orange {
+  color: orange;
+}
+.red {
+  color: red;
+}
+.blue {
+  color: blue;
+}
+.green {
+  color: green;
+}
