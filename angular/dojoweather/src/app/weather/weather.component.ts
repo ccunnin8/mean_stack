@@ -7,16 +7,11 @@ import { WeatherService } from '../weather.service';
   styleUrls: ['./weather.component.css']
 })
 export class WeatherComponent implements OnInit {
-  city: string;
   weather: any;
   constructor(private _route: ActivatedRoute, private _weather: WeatherService) {
+    this.weather = this._weather.weather;
     this._route.paramMap.subscribe((params)=>{
-      if (params.get("city")) {
-        this.city = params.get("city");
-      } else {
-        this.city = "washington";
-      }
-      _weather.getWeather(this.city);
+      _weather.getWeather(params.get("city"));
     });
   }
 

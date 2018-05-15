@@ -1,3 +1,11 @@
-<p>
-  the city is {{ city }}
-</p>
+<div class="container">
+  <h1>City: {{ weather._value.name }}</h1>
+  <div class="left">
+    <p>Humidity: {{ weather._value.main.humidity }}</p>
+    <p>Temperature (Average): {{weather._value.main.temp }} </p>
+    <p>Temperature (High): {{ weather._value.main.temp_max }} </p>
+    <p>Temperature (Low): {{ weather._value.main.temp_min }} </p>
+    <p>Status: {{ weather_value.weather.description }} </p>
+  </div>
+</div>
+{{ weather._value | json }}
