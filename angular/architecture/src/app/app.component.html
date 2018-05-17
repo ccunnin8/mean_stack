@@ -1,0 +1,72 @@
+<!--The content below is only a placeholder and can be replaced.-->
+<div style="text-align:center">
+  <h1>
+    Request a pet sitter
+  </h1>
+</div>
+<div class="container">
+  <div class="success" *ngIf="request">
+    <p>Hello {{ request.first_name }}, we received your request for a pet sitter for {{ request.pet_name }}.
+      We'll send a confirmation email to {{ request.email }} soon. Have a wonderful day! </p>
+  </div>
+  <form (submit)="onSubmit()" #form="ngForm">
+    <p>
+      <label for="first_name">First name: </label>
+      <input type="text" name="first_name" value="" id="first_name"
+      #first_name = "ngModel"
+      required minlength="2"
+      [(ngModel)]="petsitter.first_name">
+      <span *ngIf="first_name.invalid">Please provide a valid name</span>
+    </p>
+    <p>
+      <label for="last_name">Last name: </label>
+      <input type="text" name="last_name" value="" id="last_name"
+      #last_name="ngModel" required minlength=2
+      [(ngModel)]="petsitter.last_name">
+      <span *ngIf="last_name.invalid">Please provide a valid last name</span>
+    </p>
+    <p>
+      <label for="email">Email: </label>
+      <input type="text" name="email" value="" id="email"
+      #email="ngModel" required
+      [(ngModel)]="petsitter.email">
+      <span *ngIf="email.invalid">Please provide a valid email address</span>
+    </p>
+    <p>
+      <label for="pet_name">Pet's name: </label>
+      <input type="text" name="pet_name" value="" id="pet_name"
+      #pet_name="ngModel" required minlength="2"
+      [(ngModel)]="petsitter.pet_name">
+      <span *ngIf="pet_name.invalid">Please provide a valid pet name</span>
+    </p>
+    <p>
+      <label for="Pet type">Pet type: </label>
+      <input type="text" name="pet_type" value="" id="pet_type"
+      #pet_type="ngModel" required minlength="2"
+      [(ngModel)]="petsitter.pet_type">
+      <span *ngIf="pet_type.invalid">Please provide a valid pet type</span>
+    </p>
+    <p>
+      <label for="start_date">Start Date: </label>
+      <input type="date" name="start_date" value="" id="start_date"
+      #start_date = "ngModel" required
+      [(ngModel)]="petsitter.start_date">
+      <span *ngIf="start_date.invalid">Please provide a start date</span>
+    </p>
+    <p>
+      <label for="end_date">End date: </label>
+      <input type="date" name="end_date" value="" id="end_date"
+      #end_date="ngModel" required
+      [(ngModel)]="petsitter.end_date">
+      <span *ngIf="end_date.invalid">Please provide an end date</span>
+    </p>
+    <p>
+      <label for="notes">Optional notes: </label>
+      <textarea name="notes" rows="8" cols="80" ></textarea>
+    </p>
+    <p>
+      <input *ngIf="form.invalid" type="submit" name="" value="Submit" disabled>
+      <input *ngIf="form.valid" type="submit" name="" value="Submit">
+    </p>
+  </form>
+</div>
