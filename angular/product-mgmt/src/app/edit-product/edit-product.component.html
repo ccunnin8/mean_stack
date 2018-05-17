@@ -1,0 +1,16 @@
+<h1>Edit Product</h1>
+<form #form="ngForm" (submit)="updateProduct('product?.id')">
+  <label for="title">Title
+    <input type="text" name="title" id="title"
+    [(ngModel)]="product.title" #title="ngModel" [value]="product?.title"
+    required minlength="4">
+  </label>
+  <label for="price">Price
+    <input type="text" name="price" [value]="product?.price" id="price" [(ngModel)]="product.price" #price="ngModel" required>
+  </label>
+  <label for="image">Image Url
+    <input type="text" name="image" [value]="product?.image" id="image" [(ngModel)]="product.image" #image="ngModel">
+  </label>
+  <input type="submit" name="" value="Update" [disabled]='!form.valid'>
+  <button (click)="deleteProduct(product?.id)" type="button" name="button">Delete</button>
+</form>

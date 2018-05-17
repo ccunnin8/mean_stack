@@ -1,0 +1,28 @@
+.product {
+  width: 200px;
+  height: 400px;
+  border: 1px solid black;
+  padding: 4px;
+  margin: 2px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  align-items: center;
+}
+img {
+  width: 150px;
+  height: 150px;
+}
+button {
+  width: 150px;
+}
+button:first-child {
+  background-color: orange;
+  color: black;
+  box-shadow: 2px 2px 2px black;
+}
+button:last-child {
+  background-color: red;
+  color: white;
+  box-shadow: 2px 2px 2px black;
+}

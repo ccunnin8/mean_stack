@@ -1,0 +1,15 @@
+<h1>Create a New Product</h1>
+<form #form="ngForm" (submit)="newProduct()">
+  <label for="title">Title
+    <input type="text" name="title" id="title"
+    [(ngModel)]="product.title" #title="ngModel" value=""
+    required minlength="4">
+  </label>
+  <label for="price">Price
+    <input type="text" name="price" value="" id="price" [(ngModel)]="product.price" #price="ngModel" required>
+  </label>
+  <label for="image">Image Url
+    <input type="text" name="image" value="" id="image" [(ngModel)]="product.image" #image="ngModel">
+  </label>
+  <input type="submit" name="" value="Create" [disabled]='!form.valid'>
+</form>

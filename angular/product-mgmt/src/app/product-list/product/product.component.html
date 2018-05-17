@@ -1,7 +1,7 @@
 <div class="product">
   <img *ngIf="product?.image" [src]="product.image" alt="image of the product">
-  <h2>{{ product.name }}</h2>
-  <h3>{{ product.price }}</h3>
-  <button type="button" name="button">Edit</button>
-  <button type="button" name="delete">Delete</button>
+  <h2>{{ product?.title }}</h2>
+  <h3>{{ product?.price }}</h3>
+  <a [routerLink]="['edit',product?.id]"><button type="button" name="button">Edit</button></a>
+  <button (click)="deleteProduct(product?.id)" type="button" name="delete">Delete</button>
 </div>
