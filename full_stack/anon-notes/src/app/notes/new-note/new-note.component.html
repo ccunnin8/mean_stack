@@ -1,8 +1,10 @@
 <div class="container">
   <form (submit)="submitHandler($event)" #form="ngForm">
     <label for="note">Note:
-      <input type="text" name="content" value="" [(ngModel)]="note.content" #content="ngModel">
-      <input type="submit" name="" value="Add Note">
+      <input type="text" name="content" value=""
+      minlength="3" required
+      [(ngModel)]="note.content" #content="ngModel">
+      <input type="submit" name="" value="Add Note" [disabled]="!form.valid">
     </label>
   </form>
 </div>

@@ -14,7 +14,7 @@ import { NoteDataService } from "./notes/note-data.service";
     NotesComponent,
     NewNoteComponent,
     NoteListComponent,
-    NoteComponent
+    NoteComponent,
   ],
   imports: [
     BrowserModule,
