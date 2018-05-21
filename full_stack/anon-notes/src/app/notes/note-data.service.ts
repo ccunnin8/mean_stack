@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { BehaviorSubject } from 'rxjs';
+import { HttpClient } from "@angular/common/http"
 import { Note } from './note';
 
 @Injectable({
@@ -7,18 +8,21 @@ import { Note } from './note';
 })
 export class NoteDataService {
   notes: BehaviorSubject<Note[]> = new BehaviorSubject([]);
-
-  constructor() {
+  private uri: string = "/api/notes";
+  constructor(private _http: HttpClient) {
     //get initial notes from API? load behavior object with notes from api
+    this.getNotes();
   }
 
   addNote(note): void{
-    let temp = this.notes.getValue();
-    temp.push(note);
-    this.notes.next(temp);
-    //save to api
+    this._http.post(this.uri,note).subscribe(
+      (response)=> { this.getNotes(); }
+    );
   }
-  getNotes(): void{
-    return this.notes.getValue();
+  getNotes(): void {
+    this._http.get(this.uri).subscribe(
+      (response: Note[]) => {
+        this.notes.next(response) }
+    );
   }
 }

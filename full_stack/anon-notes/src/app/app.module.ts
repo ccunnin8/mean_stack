@@ -7,6 +7,7 @@ import { NewNoteComponent } from './notes/new-note/new-note.component';
 import { NoteListComponent } from './notes/note-list/note-list.component';
 import { NoteComponent } from './notes/note-list/note/note.component';
 import { NoteDataService } from "./notes/note-data.service";
+import { HttpClientModule } from "@angular/common/http";
 
 @NgModule({
   declarations: [
@@ -18,7 +19,8 @@ import { NoteDataService } from "./notes/note-data.service";
   ],
   imports: [
     BrowserModule,
-    FormsModule
+    FormsModule,
+    HttpClientModule
   ],
   providers: [NoteDataService],
   bootstrap: [AppComponent]

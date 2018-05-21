@@ -1,0 +1,11 @@
+.container {
+  width: 80%;
+  margin: 0 auto;
+  font-size: 2rem;
+}
+h1 {
+  font-size: 3rem;
+}
+input[type="text"] {
+  width: 70%;
+}
