@@ -1,3 +1,14 @@
-<p>
-  player-list works!
-</p>
+<table>
+  <thead>
+    <td>Team Name</td>
+    <td>Preferred Position</td>
+    <td>Actions</td>
+  </thead>
+  <tbody>
+    <tr *ngFor="let user of players">
+      <td>{{ user.name }}</td>
+      <td>{{ user.position }}</td>
+      <td><a href="#">Delete</a></td>
+    </tr>
+  </tbody>
+</table>

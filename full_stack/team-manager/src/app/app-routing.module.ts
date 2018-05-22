@@ -4,9 +4,7 @@ import { ManagerPlayersComponent } from "./manager-players/manager-players.compo
 import { PlayerStatusComponent } from "./player-status/player-status.component";
 import { AddPlayerComponent } from "./manager-players/add-player/add-player.component";
 import { PlayerListComponent } from "./manager-players/player-list/player-list.component";
-import { Game1Component } from "./player-status/game1/game1.component";
-import { Game2Component } from "./player-status/game2/game2.component";
-import { Game3Component } from "./player-status/game3/game3.component";
+import { GameComponent } from "./player-status/game/game.component";
 import { AppComponent } from "./app.component";
 const routes = [
   {
@@ -34,9 +32,7 @@ const routes = [
     path: "status",
     component: PlayerStatusComponent,
     children: [
-      { path: "game/1", component: Game1Component, pathMatch: "full" }
-      { path: "game/2", component: Game2Component, pathMatch: "full" }
-      { path: "game/3", component: Game3Component, pathMatch: "full" }
+      { path: "game/:id", component: GameComponent, pathMatch: "full" },
     ],
   }
 ];

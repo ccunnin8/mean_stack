@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { Player } from "../player";
+import { DataService } from "../../data.service";
 
 @Component({
   selector: 'app-add-player',
@@ -6,10 +8,18 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./add-player.component.css']
 })
 export class AddPlayerComponent implements OnInit {
-
-  constructor() { }
+  player: Player;
+  constructor(private _data: DataService) { }
 
   ngOnInit() {
+    this.player = new Player();
+  }
+
+  onSubmit(event){
+    event.preventDefault();
+    this._data.addPlayer(this.player);
+    console.log(this.player);
+    this.player = new Player();
   }
 
 }

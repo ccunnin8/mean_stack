@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { DataService } from "../../data.service";
+import { Player } from "../player";
 
 @Component({
   selector: 'app-player-list',
@@ -6,10 +8,11 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./player-list.component.css']
 })
 export class PlayerListComponent implements OnInit {
-
-  constructor() { }
+  players: Player[];
+  constructor(private _data: DataService) { }
 
   ngOnInit() {
+    this._data.players.subscribe(data => this.players = data );
   }
 
 }
