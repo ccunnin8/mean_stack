@@ -1,10 +1,17 @@
 <h1>Add Player</h1>
 <form (submit)="onSubmit($event)" #form="ngForm">
-  <label for="name">Name:
-    <input type="text" name="name"  id="name" required [(ngModel)]="player.name" #name="ngModel" minlength="2">
-  </label>
+  <p>
+    <label for="name">Name:
+      <input type="text" name="name"  id="name" required [(ngModel)]="player.name" #name="ngModel" minlength="2">
+    </label>
+  </p>
   <p><span *ngIf="name.errors">Name must be at least 2 characters</span></p>
-  <label for="position">Preferred Position:
-    <input type="text" name="position" id="position" required [(ngModel)]="player.position" #position="ngModel"></label>
-  <input type="submit" value="Add Player" [disabled]="!form.valid">
+  <p>
+    <label for="position">Preferred Position:
+      <input type="text" name="position" id="position" required [(ngModel)]="player.position" #position="ngModel">
+    </label>
+  </p>
+  <p>
+    <input type="submit" value="Add Player" [disabled]="!form.valid">
+  </p>
 </form>

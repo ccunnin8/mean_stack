@@ -1,0 +1,13 @@
+ul li {
+  list-style: none;
+  display: inline-block;
+  margin-right: 5px;
+  font-size: 2rem;
+}
+li:not(:last-child):after {
+  content: " | ";
+}
+.container {
+  width: 80%;
+  margin: 0 auto;
+}

@@ -8,20 +8,17 @@ interface Games {
   game1: Status;
   game2: Status;
   game3: Status;
-  _id: string;
 }
 
 export class Player {
   public name: string;
   public position: string;
   public games: Games;
-  public _id: string;
   constructor(){
     this.games = {
       game1: 3,
       game2: 3,
       game3: 3,
-      _id: ""
     }
   }
 }

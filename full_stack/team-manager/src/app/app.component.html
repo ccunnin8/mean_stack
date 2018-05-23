@@ -1,7 +1,9 @@
 <div class="nav">
   <ul>
     <li><a [routerLink]='["players","list"]'>Manager Players</a></li>
-    <li><a [routerLink]='["status"]'>Manager Player Status</a></li>
+    <li><a [routerLink]='["status","game",1]'>Manager Player Status</a></li>
   </ul>
 </div>
-<router-outlet></router-outlet>
+<div class="container">
+  <router-outlet></router-outlet>
+</div>

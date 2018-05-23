@@ -1,0 +1,9 @@
+ul li {
+  list-style: none;
+  display: inline-block;
+  margin-right: 5px;
+  font-size: 1.5rem;
+}
+li:first-child:after {
+  content: " | ";
+}
