@@ -12,7 +12,12 @@ export class PlayerListComponent implements OnInit {
   constructor(private _data: DataService) { }
 
   ngOnInit() {
-    this._data.players.subscribe(data => this.players = data );
+    this._data.players.subscribe((data) =>{
+        this.players = data;
+    });
+  }
+  deletePlayer(id){
+    this._data.deletePlayer(id);
   }
 
 }

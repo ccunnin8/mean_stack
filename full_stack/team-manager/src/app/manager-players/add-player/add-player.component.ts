@@ -18,7 +18,6 @@ export class AddPlayerComponent implements OnInit {
   onSubmit(event){
     event.preventDefault();
     this._data.addPlayer(this.player);
-    console.log(this.player);
     this.player = new Player();
   }
 

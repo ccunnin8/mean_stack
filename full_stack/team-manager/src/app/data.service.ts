@@ -7,23 +7,32 @@ import { Player } from "./manager-players/player";
   providedIn: 'root'
 })
 export class DataService {
-  players: BehaviorSubject<Player[]> = new BehaviorSubject([]);
-  constructor() {
+  players: BehaviorSubject<any> = new BehaviorSubject([]);
+  url: string = "api/players";
+
+  constructor(private _http: HttpClient) {
+    this.getPlayers();
   }
-  getPlayers(): Player[]{
-    return this.players.getValue();
+  getPlayers(): void{
+    this._http.get(this.url).subscribe(data => this.players.next(data));
   }
   addPlayer(player: Player): void{
-    let temp = this.getPlayers();
-    temp.push(player);
-    this.players.next(temp);
+    this._http.post(this.url,player).subscribe(res => this.getPlayers());
   }
   update_player(id: string, status: number, game:string ): void{
-    let temp = this.getPlayers();
-    temp.map((x)=>{
-      if (x.id === id){
-        x.games[game] = status;
-      }
-    })
+    // let temp = this.players.getValue();
+    // temp.map((x)=>{
+    //   if (x._id === id){
+    //     x.games[game] = status;
+    //   }
+    // })
+    this._http.put(`${this.url}/${id}`, {game,status}).subscribe((res) =>{
+      this.getPlayers();
+    });
+  }
+  deletePlayer(id: string){
+    this._http.delete(`${this.url}/${id}`).subscribe((data)=>{
+      this.getPlayers();
+    });
   }
 }

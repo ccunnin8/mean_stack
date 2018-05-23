@@ -20,13 +20,8 @@ export class GameComponent implements OnInit {
       this.game = "game" + params.get("id");
     });
   }
-  playing(id){
-    this._data.update_player(id,1,this.game);
+  updateStatus(id: string,status: number): void{
+    this._data.update_player(id,status,this.game);
   }
-  not_playing(id){
-    this._data.update_player(id,2,this.game);
-  }
-  undecided(id){
-    this._data.update_player(id,3,this.game);
-  }
+
 }

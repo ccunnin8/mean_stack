@@ -8,9 +8,9 @@
     <tr *ngFor="let player of players">
       <td>{{ player.name }}</td>
       <td>
-        <button [ngClass]="{'green': player.games[game] === 1 }" (click)="playing(player.id)">Playing</button>
-        <button [ngClass]="{'red': player.games[game] === 2}" (click)="not_playing(player.id)">Not Playing</button>
-        <button [ngClass]="{'yellow': player.games[game] === 3}" (click)="undecided(player.id)">Undecided</button>
+        <button [ngClass]="{'green': player.games[game] === 1 }" (click)="updateStatus(player._id,1)">Playing</button>
+        <button [ngClass]="{'red': player.games[game] === 2}" (click)="updateStatus(player._id,2)">Not Playing</button>
+        <button [ngClass]="{'yellow': player.games[game] === 3}" (click)="updateStatus(player._id,3)">Undecided</button>
       </td>
     </tr>
   </tbody>

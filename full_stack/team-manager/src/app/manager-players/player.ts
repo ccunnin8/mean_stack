@@ -1,5 +1,3 @@
-import uuid from 'uuid';
-
 enum Status {
   "Playing" = 1,
   "Not Playing" = 2,
@@ -10,19 +8,20 @@ interface Games {
   game1: Status;
   game2: Status;
   game3: Status;
+  _id: string;
 }
 
 export class Player {
   public name: string;
   public position: string;
   public games: Games;
-  public id: uuid;
+  public _id: string;
   constructor(){
     this.games = {
       game1: 3,
       game2: 3,
-      game3: 3
+      game3: 3,
+      _id: ""
     }
-    this.id = uuid();
   }
 }
