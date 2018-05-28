@@ -1,0 +1,11 @@
+<div class="player">
+  <h1>{{ player }}</h1>
+  <form (submit)=handleSubmit($event) #form="ngForm">
+    <div>
+      <label for="username">Github Username</label>
+      <input type="text" name="username" placeholder='github_username' [(ngModel)]="user.username" #username="ngModel">
+    </div>
+    <p *ngIf="error">Github username does not exist, try again</p>
+    <input type="submit" value="Get User">
+  </form>
+</div>
