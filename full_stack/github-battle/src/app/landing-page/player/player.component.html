@@ -1,11 +1,15 @@
 <div class="player">
   <h1>{{ player }}</h1>
-  <form (submit)=handleSubmit($event) #form="ngForm">
+  <form *ngIf="!user.photo" (submit)=handleSubmit($event) #form="ngForm">
     <div>
       <label for="username">Github Username</label>
-      <input type="text" name="username" placeholder='github_username' [(ngModel)]="user.username" #username="ngModel">
+      <input type="text" name="username" placeholder='github_username' [(ngModel)]="user.username" #username="ngModel" required>
     </div>
     <p *ngIf="error">Github username does not exist, try again</p>
-    <input type="submit" value="Get User">
+    <input type="submit" value="Get User" [disabled]="!form.valid">
   </form>
+  <div *ngIf="user.photo" class="profile" >
+    <img src="{{ user.photo }}" alt="picture of {{ user.photo }}'s avatar'">
+    <h2>{{ user.username }}</h2>
+  </div>
 </div>
