@@ -10,9 +10,11 @@ export class DataService {
   constructor(private _http: HttpClient) { }
 
   getPlayer(username){
-    this._http.get(`${this.url}/${username}`).subscribe((data)=>{
-      console.log(data)
-    },
-    error => {console.log(error)})
-  }
+    return new Promise((resolve,reject)=>{
+        this._http.get(`${this.url}/${username}`).subscribe((data)=>{
+        resolve(data);
+      },
+        error => { reject(error) } )
+      })
+    }
 }

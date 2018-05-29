@@ -1,4 +1,5 @@
 <div class="battle-area">
-  <app-player [player]="player1"></app-player>
-  <app-player [player]="player2"></app-player>
+  <app-player (addPlayer)="addPlayer($event)" [player]="player1"></app-player>
+  <app-player (addPlayer)="addPlayer($event)" [player]="player2"></app-player>
+  <button>Battle</button>
 </div>

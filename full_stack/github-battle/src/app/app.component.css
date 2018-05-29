@@ -1,0 +1,10 @@
+.header {
+  text-align: center;
+}
+ul li, ul {
+  display: inline;
+  list-style: none;
+}
+li:first-child:after {
+  content: " | "
+}
