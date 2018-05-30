@@ -1,0 +1,9 @@
+.container {
+  width: 80%;
+  margin: 0 auto;
+}
+.left, .right {
+  width: 50%;
+  display: inline-block;
+  vertical-align: top;
+}

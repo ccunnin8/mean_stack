@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { Player } from '../landing-page/player/player';
+import { DataService } from '../data.service';
 
 @Component({
   selector: 'app-results',
@@ -6,10 +8,13 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./results.component.css']
 })
 export class ResultsComponent implements OnInit {
-
-  constructor() { }
+  winner: Player;
+  loser: Player;
+  constructor(private _data: DataService) { }
 
   ngOnInit() {
+    this.winner = this._data.winner;
+    this.loser = this._data.loser;
   }
 
 }

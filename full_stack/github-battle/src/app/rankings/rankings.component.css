@@ -1,0 +1,11 @@
+.container {
+  width: 80%;
+  margin: 0 auto;
+}
+.player {
+  display: flex;
+  flex-direction: row;
+}
+.player > {
+  margin: 5px;
+}

@@ -1,5 +1,5 @@
 <div class="battle-area">
   <app-player (addPlayer)="addPlayer($event)" [player]="player1"></app-player>
   <app-player (addPlayer)="addPlayer($event)" [player]="player2"></app-player>
-  <button>Battle</button>
+  <button *ngIf="length_of_players === 2" (click)="battle()">Battle</button>
 </div>

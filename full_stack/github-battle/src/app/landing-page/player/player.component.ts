@@ -1,7 +1,7 @@
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { Player } from './player';
 import { DataService } from '../../data.service';
-import uuid from 'uuid';
+
 
 @Component({
   selector: 'app-player',
@@ -22,11 +22,9 @@ export class PlayerComponent implements OnInit {
 
   handleSubmit(e){
       this._data.getPlayer(this.user.username).then((data)=>{
-        this.user.username = data.login;
-        this.user.photo = data.avatar_url;
-        this.user._id: uuid();
-        this.user.score = (data.public_repos + data.followers) * 12;
-        this.addPlayer.emit(this.user);
+        const new_player = this._data.createPlayer(data);
+        this.user = new_player;
+        this.addPlayer.emit(new_player);
       }).catch((error)=>{
         this.error = true;
       })

@@ -1,3 +1,8 @@
-<p>
-  rankings works!
-</p>
+<div class="container">
+  <h1>Rankings</h1>
+  <div *ngFor="let player of players; let i = index" class="player">
+    <h1>{{ i + 1}}</h1>
+    <img src="{{player.photo}}" alt="avatar for {{ player.username }}">
+    <h1>Score {{ player.score }}</h1>
+  </div>
+</div>
