@@ -1,0 +1,28 @@
+<nav class="navbar" role="navigation" aria-label="main navigation">
+  <div class="container">
+    <div class="navbar-brand">
+      <ul>
+        <li>
+          <a href="['browse']"><strong>Browse</strong></a>
+        </li>
+        <li>
+          <a [routerLink]="['listings']">My Listings</a>
+        </li>
+        <li>
+          <a href="#">Log Off</a>
+        </li>
+      </ul>
+    </div>
+  </div>
+</nav>
+<section class="search">
+  <div class="container">
+    <form>
+      <label for="search">Search: <input type="text" name="search"></label>
+      <input type="submit" value="Search">
+    </form>
+  </div>
+</section>
+<section class="listings">
+  <app-bicycle *ngFor="let bicycle of bicycles" [bicycle]="bicycle"></app-bicycle>
+</section>

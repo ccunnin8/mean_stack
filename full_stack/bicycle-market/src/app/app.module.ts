@@ -1,0 +1,29 @@
+import { BrowserModule } from '@angular/platform-browser';
+import { NgModule } from '@angular/core';
+import { FormsModule } from '@angular/forms';
+import { HttpClientModule } from '@angular/common/http';
+import { AppRoutingModule } from './app-routing.module';
+import { AppComponent } from './app.component';
+import { HomeComponent } from './home/home.component';
+import { BicycleComponent } from './bicycle/bicycle.component';
+import { SearchComponent } from './search/search.component';
+import { ListingsComponent } from './listings/listings.component';
+
+@NgModule({
+  declarations: [
+    AppComponent,
+    HomeComponent,
+    BicycleComponent,
+    SearchComponent,
+    ListingsComponent
+  ],
+  imports: [
+    BrowserModule,
+    AppRoutingModule,
+    FormsModule,
+    HttpClientModule
+  ],
+  providers: [],
+  bootstrap: [AppComponent]
+})
+export class AppModule { }

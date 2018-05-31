@@ -1,0 +1,18 @@
+.bicycle {
+  width: 80%;
+  vertical-align: top;
+  border: 5px solid black;
+  padding: 20px;
+  background-color: lightgrey;
+}
+.container, .column {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.media {
+  flex-direction: column;
+}
+input[type="submit"]{
+  width: 100%;
+}

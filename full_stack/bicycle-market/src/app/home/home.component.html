@@ -1,0 +1,67 @@
+<section class="bike_of_day hero">
+  <section class="hero-body">
+    <div class="container">
+      <h1 class="title has-text-link">Bike of the day</h1>
+      <app-bicycle [bicycle]="bicycle" ></app-bicycle>
+    </div>
+  </section>
+</section>
+<section>
+  <section class="container">
+    <div class="columns">
+      <div class="login column">
+        <form>
+          <div class="field">
+            <div class="control">
+              <label for="">Email: </label>
+              <input type="email" name="email" required>
+            </div>
+          </div>
+          <div class="field">
+            <div class="control">
+              <label for="">Password: </label>
+              <input type="password" name="password" required>
+            </div>
+          </div>
+          <p *ngIf="">Invalid Credentials</p>
+          <input type="submit" value="login">
+        </form>
+      </div>
+      <div class="register column">
+        <form class="has-text-right">
+            <div class="field">
+              <div class="control">
+                <label for="first_name">First Name</label>
+                <input type="text" name="first_name" required>
+              </div>
+            </div>
+            <div class="field">
+              <div class="control">
+                <label for="last_name">Last Name</label>
+                <input type="text" name="last_name" required>
+              </div>
+            </div>
+            <div class="field">
+              <div class="control">
+                <label for="email">Email: </label>
+                <input type="email" name="email" required>
+              </div>
+            </div>
+            <div class="field">
+              <div class="control">
+                <label for="password">Password: </label>
+                <input type="password" name="password" required>
+              </div>
+            </div>
+            <div class="field">
+              <div class="control">
+                <label for="password_conf">Confirm Password: </label>
+                <input type="password" name="password_confirm" required pattern="">
+              </div>
+            </div>
+            <input type="submit" value="Register">
+        </form>
+      </div>
+      </div>
+  </section>
+</section>

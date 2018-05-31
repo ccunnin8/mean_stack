@@ -1,0 +1,25 @@
+ul li, ul {
+  display: inline;
+  list-style-type: none;
+}
+li {
+  margin-left: 3px;
+  margin-right: 3px;
+}
+.navbar-brand li:not(:last-child):after {
+  content: " | ";
+}
+input[name="search"]{
+  width: 70%;
+}
+label, input {
+  display: block;
+}
+.columns {
+  width: 80%;
+  margin: 0 auto;
+  display: flex;
+  -ms-align-items: center;
+  align-items: center;
+  justify-content: center;
+}

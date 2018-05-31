@@ -1,0 +1,11 @@
+ul li, ul {
+  display: inline;
+  list-style-type: none;
+}
+li {
+  margin-left: 3px;
+  margin-right: 3px;
+}
+.navbar-brand li:not(:last-child):after {
+  content: " | ";
+}
