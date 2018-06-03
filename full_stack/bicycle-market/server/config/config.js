@@ -5,7 +5,7 @@ const modelsPath = path.join(__dirname, '../models');
 
 mongoose.connect("mongodb://localhost/bicycle-marketplace");
 
-mongoose.connect.on("connected",()=> console.log("connected to mongoose database"));
+mongoose.connection.on("connected",()=> console.log("connected to mongoose database"));
 
 fs.readdirSync(modelsPath).forEach((file)=>{
   require(path.join(modelsPath,file));
