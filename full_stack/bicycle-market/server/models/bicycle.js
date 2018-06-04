@@ -11,4 +11,4 @@ const BicycleSchema = new mongoose.Schema({
 
 const Bicycle = mongoose.model("Bicycle",BicycleSchema);
 
-module.exports = Bicycle;
+module.exports = { Bicycle, BicycleSchema } ;

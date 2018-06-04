@@ -2,8 +2,11 @@ import { Bicycle } from './bicycle';
 
 export class User {
   email: string;
-  password: string; //HASH W BCRYPT IN EXPRESS 
-  bicycles: Array<Bicycle>
+  first_name: string;
+  last_name: string;
+  password: string;
+  password_conf: string;
+  bicycles: Array<Bicycle>;
   constructor() {
   }
 }

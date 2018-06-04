@@ -3,8 +3,9 @@ const UsersController = require('../controllers/user');
 
 
 router
-  .post("/register",UsersControllers.register)
-  .login("/login",UserControllers.login);
+  .post("/register",UsersController.register)
+  .post("/login",UsersController.login)
+  .get("/logout",UsersController.logout);
 
 
 module.exports = router;

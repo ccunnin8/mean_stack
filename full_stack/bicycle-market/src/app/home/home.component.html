@@ -10,56 +10,58 @@
   <section class="container">
     <div class="columns">
       <div class="login column">
-        <form>
+        <p>{{ login_errors }}</p>
+        <form #login_form="ngForm" (submit)="login($event)">
           <div class="field">
             <div class="control">
               <label for="">Email: </label>
-              <input type="email" name="email" required>
+              <input type="email" name="email" required [(ngModel)]="login_user.email">
             </div>
           </div>
           <div class="field">
             <div class="control">
               <label for="">Password: </label>
-              <input type="password" name="password" required>
+              <input type="password" name="password" required [(ngModel)]="login_user.password">
             </div>
           </div>
           <p *ngIf="">Invalid Credentials</p>
-          <input type="submit" value="login">
+          <input type="submit" value="login" [(disabled)]="!login_form.valid">
         </form>
       </div>
       <div class="register column">
-        <form class="has-text-right">
+        <p>{{ register_errors }}</p>
+        <form class="has-text-right" #form="ngForm" (submit)="register($event)">
             <div class="field">
               <div class="control">
                 <label for="first_name">First Name</label>
-                <input type="text" name="first_name" required>
+                <input type="text" name="first_name" required [(ngModel)]="user.first_name" #first_name="ngModel" minlength="2">
               </div>
             </div>
             <div class="field">
               <div class="control">
                 <label for="last_name">Last Name</label>
-                <input type="text" name="last_name" required>
+                <input type="text" name="last_name" required [(ngModel)]="user.last_name" #last_name="ngModel">
               </div>
             </div>
             <div class="field">
               <div class="control">
                 <label for="email">Email: </label>
-                <input type="email" name="email" required>
+                <input type="email" name="email" required [(ngModel)]="user.email" #email="ngModel">
               </div>
             </div>
             <div class="field">
               <div class="control">
                 <label for="password">Password: </label>
-                <input type="password" name="password" required>
+                <input type="password" name="password" required [(ngModel)]="user.password" #password="ngModel">
               </div>
             </div>
             <div class="field">
               <div class="control">
                 <label for="password_conf">Confirm Password: </label>
-                <input type="password" name="password_confirm" required pattern="">
+                <input type="password" name="password_confirm" required [(ngModel)]="user.password_conf" #password_conf="ngModel" [(pattern)]="user.password">
               </div>
             </div>
-            <input type="submit" value="Register">
+            <input type="submit" value="Register" [disabled]="!form.valid">
         </form>
       </div>
       </div>
