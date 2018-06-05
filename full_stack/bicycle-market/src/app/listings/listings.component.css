@@ -23,3 +23,7 @@ label, input {
   align-items: center;
   justify-content: center;
 }
+image {
+  width: 200px;
+  height: 200px;
+}

@@ -5,7 +5,7 @@ export class Bicycle {
   description: string;
   location: string;
   price: string;
-  image: string; //will be location of image stored as a file, location stored in mongo
+  image: any; //will be location of image stored as a file, location stored in mongo
   user: User
   constructor() {}
 }

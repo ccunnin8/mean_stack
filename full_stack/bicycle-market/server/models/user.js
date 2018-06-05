@@ -18,6 +18,13 @@ const UserSchema = new mongoose.Schema({
 }, { timestamps: true });
 
 
+UserSchema.pre("save",function (done) {
+  bcrypt.hash(this.password,10).then((hashed_password)=>{
+    this.password = hashed_password
+    done();
+  }).catch(err => err );
+});
+
 const User = mongoose.model("User",UserSchema);
 
 //export User

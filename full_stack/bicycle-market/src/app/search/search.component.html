@@ -3,13 +3,13 @@
     <div class="navbar-brand">
       <ul>
         <li>
-          <a href="['browse']"><strong>Browse</strong></a>
+          <a [routerLink]="['/browse']"><strong>Browse</strong></a>
         </li>
         <li>
-          <a [routerLink]="['listings']">My Listings</a>
+          <a [routerLink]="['/listings']">My Listings</a>
         </li>
         <li>
-          <a href="#">Log Off</a>
+          <a href="/logout">Log Off</a>
         </li>
       </ul>
     </div>

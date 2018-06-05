@@ -1,5 +1,4 @@
 const User = require('../models/user');
-const session = require('express-session')
 const bcrypt = require('bcrypt');
 
 module.exports = {
@@ -9,9 +8,9 @@ module.exports = {
       if (user){
         bcrypt.compare(password,user.password).then((match)=>{
           if (match) {
-            session.email = email;
-            session.user_id = user._id;
-            session.logged_in = true;
+            req.session.email = email;
+            req.session.user_id = user._id;
+            req.session.logged_in = true;
             res.json({ "email": email })
           } else{
             res.json({"error": "password not correct"})
@@ -24,17 +23,13 @@ module.exports = {
   },
   register(req,res){
     User.create(req.body).then((data)=>{
-      bcrypt.hash(data.password,10).then((hashed_pw)=>{
-        data.password = hashed_pw;
-        data.save();
         res.json({"email": data.email });
-      });
     }).catch(err => res.json({"error": err }));
   },
   logout(req,res){
-    delete(session.username);
-    delete(session.user_id);
-    delete(session.logged_in);
+    delete(req.session.username);
+    delete(req.session.user_id);
+    delete(req.session.logged_in);
     res.redirect("/");
   }
 }

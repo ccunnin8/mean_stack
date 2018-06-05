@@ -3,13 +3,13 @@
     <div class="navbar-brand">
       <ul>
         <li>
-          <a href="['browse']">Browse</a>
+          <a [routerLink]="['/browse']">Browse</a>
         </li>
         <li>
-          <a [routerLink]="['listings']"><strong>My Listings</strong></a>
+          <a [routerLink]="['/listings']"><strong>My Listings</strong></a>
         </li>
         <li>
-          <a href="#">Log Off</a>
+          <a href="logout">Log Off</a>
         </li>
       </ul>
     </div>
@@ -18,24 +18,24 @@
 <section>
   <div class="container">
     <h1 class="title">Create Listing</h1>
-    <form action="">
+    <form #new_bike="ngForm" (submit)="add_new_bike($event)">
       <div class="columns">
         <div class="column">
           <label for="image">Image Upload</label>
-          <input type="image" name="image" required>
+          <input type="file" name="image" required [(ngModel)]="bicycle.image" #image="ngModel">
         </div>
         <div class="column">
           <label for="title">Title</label>
-          <input type="text" name="title" required>
+          <input type="text" name="title" required [(ngModel)]="bicycle.title" #title="ngModel">
           <label for="description">Description</label>
-          <textarea name="description"></textarea>
+          <textarea name="description" [(ngModel)]="bicycle.description" #description="ngModel"></textarea>
         </div>
         <div class="column">
           <label for="price">Price: </label>
-          <input type="text" name="price" required>
+          <input type="text" name="price" required [(ngModel)]="bicycle.price" #price="ngModel">
           <label for="location">Location:  </label>
-          <input type="text" name="location" required>
-          <input type="submit" value="CREATE">
+          <input type="text" name="location" required [(ngModel)]="bicycle.location" #location="ngModel">
+          <input type="submit" value="CREATE" [disabled]="!new_bike.valid">
         </div>
       </div>
     </form>

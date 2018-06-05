@@ -6,7 +6,7 @@ const BicycleSchema = new mongoose.Schema({
   description: { type: String, required: true },
   location: { type: String, required: true },
   price: { type: String, required: true },
-  image: { type: Buffer, contentType: String, required: true },
+  image: { type: Buffer, contentType: String },
 });
 
 const Bicycle = mongoose.model("Bicycle",BicycleSchema);
